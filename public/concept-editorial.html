@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AYORA — Concept C: Editorial Linen</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@300;400&family=JetBrains+Mono&display=swap" rel="stylesheet">
+<style type="text/tailwindcss">
+@theme {
+  --color-paper: #fcfbf7;
+  --color-ink: #242220;
+  --color-gold: #c1a875;
+  --color-gold-muted: #d4c4a4;
+  --color-linen: #f4f1ea;
+  --font-display: 'Cormorant Garamond', serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+@keyframes reveal-down {
+  from { clip-path: inset(0 0 100% 0); transform: translateY(10px); }
+  to { clip-path: inset(0 0 0% 0); transform: translateY(0); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-reveal { animation: reveal-down 1.2s var(--ease-out-expo) both; }
+.animate-fade-up { animation: fade-up 0.8s var(--ease-out-expo) both; }
+</style>
+</head>
+<body>
+<div class="min-h-screen bg-paper text-ink font-sans selection:bg-gold/20">
+  <nav class="fixed top-0 w-full z-50 px-6 py-6 flex justify-between items-center mix-blend-multiply bg-paper/80 backdrop-blur-sm">
+    <div class="flex flex-col">
+      <span class="font-display text-2xl tracking-[0.2em] font-light">AYORA</span>
+      <span class="text-[8px] uppercase tracking-[0.3em] opacity-60">Wellness at your doorstep</span>
+    </div>
+    <div class="hidden md:flex gap-8 text-[10px] uppercase tracking-[0.2em] font-medium">
+      <a href="#services" class="hover:text-gold transition-colors">Services</a>
+      <a href="#how" class="hover:text-gold transition-colors">How it works</a>
+      <a href="#emirates" class="hover:text-gold transition-colors">Emirates</a>
+    </div>
+    <a href="#" class="bg-ink text-paper px-5 py-2.5 text-[10px] uppercase tracking-widest hover:bg-gold transition-colors">Book Now</a>
+  </nav>
+
+  <header class="relative h-screen flex flex-col justify-center items-center px-6 text-center pt-20">
+    <div class="absolute inset-0 z-0">
+      <div class="w-full h-full bg-linen opacity-60"></div>
+    </div>
+    <div class="relative z-10 max-w-4xl">
+      <span class="block text-gold font-mono text-xs mb-6 tracking-widest animate-fade-up [animation-delay:200ms]">(01) TRADITIONAL CARE</span>
+      <h1 class="font-display text-5xl md:text-8xl font-light leading-[1.1] text-balance mb-8 animate-reveal">
+        Ayurvedic Wellness <br/> <span class="italic">at Your Doorstep.</span>
+      </h1>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up [animation-delay:600ms]">
+        <a href="#services" class="ring-1 ring-ink px-8 py-4 text-xs uppercase tracking-[0.2em] hover:bg-ink hover:text-paper transition-all">Explore Our Services</a>
+      </div>
+    </div>
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-40">
+      <div class="w-px h-12 bg-ink"></div>
+    </div>
+  </header>
+
+  <section class="py-32 px-6 max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+      <div class="space-y-4 animate-fade-up">
+        <div class="w-8 h-[1px] bg-gold mb-6"></div>
+        <h3 class="font-display text-xl">Authentic Wellness</h3>
+        <p class="text-sm text-ink/60 leading-relaxed">Inspired by traditional practitioners, adapted for the modern home environment.</p>
+      </div>
+      <div class="space-y-4 animate-fade-up [animation-delay:100ms]">
+        <div class="w-8 h-[1px] bg-gold mb-6"></div>
+        <h3 class="font-display text-xl">Home Convenience</h3>
+        <p class="text-sm text-ink/60 leading-relaxed">Skip the travel. We bring professional spa equipment directly to your sanctuary.</p>
+      </div>
+      <div class="space-y-4 animate-fade-up [animation-delay:200ms]">
+        <div class="w-8 h-[1px] bg-gold mb-6"></div>
+        <h3 class="font-display text-xl">Personalized Rituals</h3>
+        <p class="text-sm text-ink/60 leading-relaxed">Each session is customized to your body type, pressure preference, and mental state.</p>
+      </div>
+      <div class="space-y-4 animate-fade-up [animation-delay:300ms]">
+        <div class="w-8 h-[1px] bg-gold mb-6"></div>
+        <h3 class="font-display text-xl">Professional Ease</h3>
+        <p class="text-sm text-ink/60 leading-relaxed">Licensed, vetted, and respectful professionals who prioritize your comfort.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="bg-linen py-32 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-20 flex justify-between items-end">
+        <h2 class="font-display text-4xl md:text-5xl italic">Home Wellness Services</h2>
+        <span class="font-mono text-xs opacity-40">(02) CATEGORIES</span>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="group bg-paper p-8 flex flex-col justify-between aspect-[3/4] hover:shadow-2xl hover:shadow-gold/10 transition-all duration-500">
+          <div>
+            <div class="w-full aspect-video bg-linen mb-8 opacity-80 group-hover:opacity-100 transition-opacity"></div>
+            <h4 class="font-display text-2xl mb-4">Ayurvedic Relaxation</h4>
+            <p class="text-xs text-ink/60 leading-relaxed">A calming full-body massage designed to promote profound mental stillness.</p>
+          </div>
+          <button class="mt-8 text-[10px] uppercase tracking-widest text-gold font-semibold">Details &bull; 90 Min</button>
+        </div>
+        <div class="group bg-paper p-8 flex flex-col justify-between aspect-[3/4] md:translate-y-12 transition-all duration-500">
+          <div>
+            <div class="w-full aspect-video bg-linen mb-8 opacity-80 group-hover:opacity-100 transition-opacity"></div>
+            <h4 class="font-display text-2xl mb-4">Abhyanga-Inspired</h4>
+            <p class="text-xs text-ink/60 leading-relaxed">Traditional rhythmic oil application using flowing techniques and warm herbal oils.</p>
+          </div>
+          <button class="mt-8 text-[10px] uppercase tracking-widest text-gold font-semibold">Details &bull; 60 Min</button>
+        </div>
+        <div class="group bg-paper p-8 flex flex-col justify-between aspect-[3/4] transition-all duration-500">
+          <div>
+            <div class="w-full aspect-video bg-linen mb-8 opacity-80 group-hover:opacity-100 transition-opacity"></div>
+            <h4 class="font-display text-2xl mb-4">Head &amp; Shoulder</h4>
+            <p class="text-xs text-ink/60 leading-relaxed">Focused relief for digital tension, headaches, and work-related neck strain.</p>
+          </div>
+          <button class="mt-8 text-[10px] uppercase tracking-widest text-gold font-semibold">Details &bull; 45 Min</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="py-32 px-6 max-w-5xl mx-auto">
+    <h2 class="font-display text-4xl text-center mb-24">Your Path to Stillness</h2>
+    <div class="space-y-24">
+      <div class="flex flex-col md:flex-row gap-12 items-center">
+        <span class="font-display text-6xl text-gold/20 italic">01</span>
+        <div class="flex-1">
+          <h4 class="text-xs uppercase tracking-widest font-semibold mb-2">Choose Service</h4>
+          <p class="text-lg font-display">Select from our curated menu of specialized Ayurvedic treatments.</p>
+        </div>
+      </div>
+      <div class="flex flex-col md:flex-row-reverse gap-12 items-center text-right">
+        <span class="font-display text-6xl text-gold/20 italic">02</span>
+        <div class="flex-1">
+          <h4 class="text-xs uppercase tracking-widest font-semibold mb-2">Pick Your Time</h4>
+          <p class="text-lg font-display">Book a window that aligns with your home schedule, morning or evening.</p>
+        </div>
+      </div>
+      <div class="flex flex-col md:flex-row gap-12 items-center">
+        <span class="font-display text-6xl text-gold/20 italic">03</span>
+        <div class="flex-1">
+          <h4 class="text-xs uppercase tracking-widest font-semibold mb-2">We Arrive</h4>
+          <p class="text-lg font-display">Our professional arrives with everything needed: linens, oils, and tranquility.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="emirates" class="bg-ink text-paper py-24 px-6">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
+      <div class="max-w-md">
+        <h2 class="font-display text-4xl italic mb-6">Available Across the Emirates</h2>
+        <p class="text-sm text-paper/60">We serve the primary urban centers of the UAE, ensuring professional care is never out of reach.</p>
+      </div>
+      <div class="flex flex-wrap gap-4 md:gap-8 text-[10px] uppercase tracking-[0.2em] font-light">
+        <span class="px-6 py-3 border border-paper/20 rounded-full">Dubai</span>
+        <span class="px-6 py-3 border border-paper/20 rounded-full">Abu Dhabi</span>
+        <span class="px-6 py-3 border border-paper/20 rounded-full">Sharjah</span>
+        <span class="px-6 py-3 border border-paper/20 rounded-full">Ajman</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-32 px-6 max-w-3xl mx-auto">
+    <div class="text-center mb-24">
+      <h2 class="font-display text-5xl mb-8">Begin Your Journey</h2>
+      <p class="text-ink/60 mb-10">Experience wellness without leaving your home. Book via WhatsApp for instant confirmation.</p>
+      <a href="#" class="inline-flex items-center gap-4 bg-gold text-paper px-10 py-5 text-sm uppercase tracking-widest hover:bg-ink transition-colors group">
+        Message on WhatsApp
+        <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+      </a>
+    </div>
+    <div class="space-y-6">
+      <div class="border-b border-ink/10 pb-6">
+        <h5 class="font-display text-lg mb-2 flex justify-between items-center">Is AYORA a home service?<span class="text-gold">+</span></h5>
+      </div>
+      <div class="border-b border-ink/10 pb-6">
+        <h5 class="font-display text-lg mb-2 flex justify-between items-center">What should I prepare?<span class="text-gold">+</span></h5>
+      </div>
+      <div class="border-b border-ink/10 pb-6">
+        <h5 class="font-display text-lg mb-2 flex justify-between items-center">Can I book for couples?<span class="text-gold">+</span></h5>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-linen pt-20 pb-10 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row justify-between mb-20 gap-12">
+        <div>
+          <span class="font-display text-3xl tracking-widest">AYORA</span>
+          <p class="text-[10px] uppercase tracking-widest text-ink/40 mt-4">&copy; 2026 Ayora Wellness UAE. All rights reserved.</p>
+        </div>
+        <div class="grid grid-cols-2 gap-16">
+          <div class="space-y-4">
+            <h6 class="text-[10px] uppercase tracking-widest font-bold">Contact</h6>
+            <p class="text-xs text-ink/60">hello@ayora.ae</p>
+            <p class="text-xs text-ink/60">+971 00 000 0000</p>
+          </div>
+          <div class="space-y-4">
+            <h6 class="text-[10px] uppercase tracking-widest font-bold">Social</h6>
+            <p class="text-xs text-ink/60">Instagram</p>
+            <p class="text-xs text-ink/60">Facebook</p>
+          </div>
+        </div>
+      </div>
+      <div class="w-full h-px bg-ink/5 mb-8"></div>
+      <div class="flex justify-between items-center">
+        <div class="flex gap-4">
+          <div class="w-4 h-4 rounded-full border border-gold/40"></div>
+          <div class="w-4 h-4 rounded-full border border-gold/40"></div>
+        </div>
+        <span class="text-[8px] uppercase tracking-[0.4em] opacity-40">Wellness Designed Around You</span>
+      </div>
+    </div>
+  </footer>
+</div>
+</body>
+</html>
