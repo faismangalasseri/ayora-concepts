@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ConceptEditorialRouteImport } from './routes/concept/editorial'
+import { Route as ConceptSerifRouteImport } from './routes/concept/serif'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConceptEditorialRoute = ConceptEditorialRouteImport.update({
+  id: '/concept/editorial',
+  path: '/concept/editorial',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConceptSerifRoute = ConceptSerifRouteImport.update({
+  id: '/concept/serif',
+  path: '/concept/serif',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/concept/editorial': typeof ConceptEditorialRoute
+  '/concept/serif': typeof ConceptSerifRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/concept/editorial': typeof ConceptEditorialRoute
+  '/concept/serif': typeof ConceptSerifRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/concept/editorial': typeof ConceptEditorialRoute
+  '/concept/serif': typeof ConceptSerifRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/concept/editorial' | '/concept/serif'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/concept/editorial' | '/concept/serif'
+  id: '__root__' | '/' | '/concept/editorial' | '/concept/serif'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ConceptEditorialRoute: typeof ConceptEditorialRoute
+  ConceptSerifRoute: typeof ConceptSerifRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/concept/editorial': {
+      id: '/concept/editorial'
+      path: '/concept/editorial'
+      fullPath: '/concept/editorial'
+      preLoaderRoute: typeof ConceptEditorialRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/concept/serif': {
+      id: '/concept/serif'
+      path: '/concept/serif'
+      fullPath: '/concept/serif'
+      preLoaderRoute: typeof ConceptSerifRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ConceptEditorialRoute: ConceptEditorialRoute,
+  ConceptSerifRoute: ConceptSerifRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
