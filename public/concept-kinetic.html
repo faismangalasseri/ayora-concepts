@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AYORA — Concept E: Kinetic Bento</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style type="text/tailwindcss">
+  @theme {
+    --color-bone: #f4f1ec;
+    --color-clay: #e4ded3;
+    --color-ink: #14150f;
+    --color-moss: #2f4a34;
+    --color-lime: #c6e14a;
+    --color-gold: #c5a059;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-sans: 'DM Sans', sans-serif;
+  }
+</style>
+<style>
+  html { scroll-behavior: smooth; }
+  .rise { opacity: 0; transform: translateY(40px) scale(.985); transition: all .9s cubic-bezier(.16,1,.3,1); }
+  .rise.in { opacity: 1; transform: none; }
+  @keyframes slide { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+  .ticker { animation: slide 22s linear infinite; }
+  @keyframes spin-slow { to { transform: rotate(360deg) } }
+  .spin-slow { animation: spin-slow 18s linear infinite; }
+  @keyframes blob { 0%,100% { border-radius: 60% 40% 55% 45%/50% 55% 45% 50%; } 50% { border-radius: 40% 60% 45% 55%/55% 45% 60% 40%; } }
+  .blob { animation: blob 12s ease-in-out infinite; }
+</style>
+</head>
+<body class="bg-bone text-ink font-sans antialiased">
+
+<nav class="sticky top-0 z-50 bg-bone/80 backdrop-blur-md">
+  <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-5">
+    <span class="font-display text-xl font-700 tracking-tight">AYORA<span class="text-lime">.</span></span>
+    <div class="hidden md:flex gap-8 text-sm text-ink/60">
+      <a href="#services" class="hover:text-ink transition-colors">Services</a>
+      <a href="#how" class="hover:text-ink transition-colors">How it works</a>
+      <a href="#book" class="hover:text-ink transition-colors">Contact</a>
+    </div>
+    <a href="#book" class="group inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm text-bone">
+      Book now <span class="transition-transform group-hover:translate-x-1">→</span>
+    </a>
+  </div>
+</nav>
+
+<header class="px-6 pt-10 pb-16">
+  <div class="max-w-7xl mx-auto">
+    <h1 class="rise font-display text-[13vw] leading-[0.86] font-500 tracking-[-0.04em] md:text-[9rem]">
+      WELLNESS<br><span class="text-moss">AT YOUR</span> <span class="italic font-300">door.</span>
+    </h1>
+    <div class="rise mt-10 grid gap-6 md:grid-cols-3 items-end">
+      <p class="md:col-span-2 max-w-xl text-lg text-ink/60 leading-relaxed">Personalised Ayurvedic massage and wellness therapies delivered to your home across the UAE — no travelling, no waiting rooms.</p>
+      <div class="flex gap-3">
+        <a href="#book" class="rounded-full bg-lime px-7 py-4 text-sm font-medium hover:-translate-y-1 transition-transform duration-500">Book a session</a>
+        <a href="#services" class="rounded-full border border-ink/20 px-7 py-4 text-sm hover:bg-ink hover:text-bone transition-colors duration-500">Services</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="overflow-hidden bg-ink py-4 text-bone">
+  <div class="ticker flex w-max gap-10 font-display text-sm uppercase tracking-[0.3em]">
+    <span>Dubai ✳ Abu Dhabi ✳ Sharjah ✳ Ajman ✳ Home visits daily ✳</span>
+    <span>Dubai ✳ Abu Dhabi ✳ Sharjah ✳ Ajman ✳ Home visits daily ✳</span>
+  </div>
+</div>
+
+<section class="px-6 py-16">
+  <div class="max-w-7xl mx-auto grid gap-5 md:grid-cols-3 md:grid-rows-2">
+    <div class="rise md:col-span-2 md:row-span-2 overflow-hidden rounded-[2rem] group">
+      <img src="/images/modern-hero.jpg" alt="Amber massage oil, towel and herbs in bright daylight" class="h-full w-full object-cover min-h-[26rem] group-hover:scale-105 transition-transform duration-[1400ms]">
+    </div>
+    <div class="rise rounded-[2rem] bg-moss text-bone p-8 flex flex-col justify-between min-h-[13rem]">
+      <span class="text-xs uppercase tracking-[0.25em] opacity-60">At-home convenience</span>
+      <p class="font-display text-3xl leading-tight">We bring the spa, you keep the sofa.</p>
+    </div>
+    <div class="rise rounded-[2rem] bg-clay p-8 flex flex-col justify-between min-h-[13rem]">
+      <div class="blob spin-slow h-12 w-12 bg-lime"></div>
+      <p class="font-display text-3xl leading-tight">Personalised to your body &amp; pace.</p>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="px-6 py-20">
+  <div class="max-w-7xl mx-auto">
+    <div class="rise flex flex-wrap items-end justify-between gap-4 mb-12">
+      <h2 class="font-display text-5xl tracking-tight">Six ways to unwind</h2>
+      <span class="text-sm text-ink/50">All sessions at your location</span>
+    </div>
+    <div class="grid gap-5 md:grid-cols-3">
+      <article class="rise group rounded-[1.75rem] bg-clay overflow-hidden hover:-translate-y-2 transition-transform duration-500">
+        <img src="/images/service-relax.jpg" alt="Ayurvedic relaxation massage setting" class="h-52 w-full object-cover">
+        <div class="p-7"><h3 class="font-display text-2xl">Ayurvedic Relaxation</h3><p class="mt-2 text-sm text-ink/60">Calming full-body massage for total stillness.</p></div>
+      </article>
+      <article class="rise group rounded-[1.75rem] bg-clay overflow-hidden hover:-translate-y-2 transition-transform duration-500">
+        <img src="/images/service-abhyanga.jpg" alt="Warm herbal oil for Abhyanga-inspired massage" class="h-52 w-full object-cover">
+        <div class="p-7"><h3 class="font-display text-2xl">Abhyanga-Inspired</h3><p class="mt-2 text-sm text-ink/60">Warm oils, flowing traditional strokes.</p></div>
+      </article>
+      <article class="rise group rounded-[1.75rem] bg-clay overflow-hidden hover:-translate-y-2 transition-transform duration-500">
+        <img src="/images/service-head.jpg" alt="Head and shoulder wellness ritual items" class="h-52 w-full object-cover">
+        <div class="p-7"><h3 class="font-display text-2xl">Head &amp; Shoulder</h3><p class="mt-2 text-sm text-ink/60">Relief for screen, travel and desk tension.</p></div>
+      </article>
+    </div>
+    <div class="rise mt-5 grid gap-5 sm:grid-cols-3">
+      <div class="rounded-[1.5rem] border border-ink/10 p-6 hover:bg-lime transition-colors duration-500"><h3 class="font-display text-xl">Back &amp; Body</h3><p class="mt-1 text-sm text-ink/60">Targeted tension release.</p></div>
+      <div class="rounded-[1.5rem] border border-ink/10 p-6 hover:bg-lime transition-colors duration-500"><h3 class="font-display text-xl">Foot Wellness</h3><p class="mt-1 text-sm text-ink/60">Unwind after a long day.</p></div>
+      <div class="rounded-[1.5rem] border border-ink/10 p-6 hover:bg-lime transition-colors duration-500"><h3 class="font-display text-xl">Stress Relief</h3><p class="mt-1 text-sm text-ink/60">Gentle, quiet, restorative.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="px-6 py-20 bg-ink text-bone rounded-t-[3rem]">
+  <div class="max-w-7xl mx-auto">
+    <h2 class="rise font-display text-5xl tracking-tight mb-14">Four steps<span class="text-lime">.</span></h2>
+    <div class="grid gap-10 md:grid-cols-4">
+      <div class="rise border-t border-bone/20 pt-6"><span class="text-lime font-display text-sm">01</span><h3 class="mt-3 font-display text-2xl">Choose your service</h3><p class="mt-2 text-sm text-bone/60">Pick the massage that suits you.</p></div>
+      <div class="rise border-t border-bone/20 pt-6"><span class="text-lime font-display text-sm">02</span><h3 class="mt-3 font-display text-2xl">Choose your time</h3><p class="mt-2 text-sm text-bone/60">Book a date and time online.</p></div>
+      <div class="rise border-t border-bone/20 pt-6"><span class="text-lime font-display text-sm">03</span><h3 class="mt-3 font-display text-2xl">We come to you</h3><p class="mt-2 text-sm text-bone/60">Home, hotel or office.</p></div>
+      <div class="rise border-t border-bone/20 pt-6"><span class="text-lime font-display text-sm">04</span><h3 class="mt-3 font-display text-2xl">Relax &amp; enjoy</h3><p class="mt-2 text-sm text-bone/60">Your session, your space.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="book" class="px-6 py-24 bg-ink text-bone">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2 class="rise font-display text-5xl md:text-7xl tracking-tight leading-[0.95]">Feel relaxed.<br>Feel refreshed.</h2>
+    <p class="rise mt-6 text-bone/60">WhatsApp +971 XX XXX XXXX • hello@ayora.ae</p>
+    <a href="#" class="rise mt-10 inline-flex items-center gap-3 rounded-full bg-lime px-9 py-4 text-ink font-medium hover:-translate-y-1 transition-transform duration-500">Book via WhatsApp <span>→</span></a>
+  </div>
+</section>
+
+<footer class="bg-ink text-bone/40 px-6 pb-12 text-center text-xs tracking-[0.2em] uppercase">AYORA — Natural. Personal. Convenient.</footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), i * 80); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.rise').forEach((el) => io.observe(el));
+</script>
+</body>
+</html>
