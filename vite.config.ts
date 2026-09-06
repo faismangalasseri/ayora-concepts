@@ -7,9 +7,23 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
+  // When building on Vercel (VERCEL=1 is set automatically), emit Vercel's
+  // Build Output API format instead of the default Cloudflare target.
+  // Lovable builds are unaffected.
+  ...(process.env.VERCEL ? { nitro: { preset: "vercel" } } : {}),
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
+    // All pages are static marketing content — prerender them to HTML.
+    pages: [
+      { path: "/" },
+      { path: "/designs" },
+      { path: "/concept/serif" },
+      { path: "/concept/editorial" },
+      { path: "/concept/noir" },
+      { path: "/concept/kinetic" },
+    ],
+    prerender: { enabled: true, autoStaticPathsDiscovery: false },
   },
 });
