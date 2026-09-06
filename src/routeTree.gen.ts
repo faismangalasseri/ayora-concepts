@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DesignsRouteImport } from './routes/designs'
 import { Route as ConceptEditorialRouteImport } from './routes/concept/editorial'
 import { Route as ConceptKineticRouteImport } from './routes/concept/kinetic'
 import { Route as ConceptNoirRouteImport } from './routes/concept/noir'
@@ -18,6 +19,11 @@ import { Route as ConceptSerifRouteImport } from './routes/concept/serif'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DesignsRoute = DesignsRouteImport.update({
+  id: '/designs',
+  path: '/designs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ConceptEditorialRoute = ConceptEditorialRouteImport.update({
@@ -43,6 +49,7 @@ const ConceptSerifRoute = ConceptSerifRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/designs': typeof DesignsRoute
   '/concept/editorial': typeof ConceptEditorialRoute
   '/concept/kinetic': typeof ConceptKineticRoute
   '/concept/noir': typeof ConceptNoirRoute
@@ -50,6 +57,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/designs': typeof DesignsRoute
   '/concept/editorial': typeof ConceptEditorialRoute
   '/concept/kinetic': typeof ConceptKineticRoute
   '/concept/noir': typeof ConceptNoirRoute
@@ -58,6 +66,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/designs': typeof DesignsRoute
   '/concept/editorial': typeof ConceptEditorialRoute
   '/concept/kinetic': typeof ConceptKineticRoute
   '/concept/noir': typeof ConceptNoirRoute
@@ -67,6 +76,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/designs'
     | '/concept/editorial'
     | '/concept/kinetic'
     | '/concept/noir'
@@ -74,6 +84,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/designs'
     | '/concept/editorial'
     | '/concept/kinetic'
     | '/concept/noir'
@@ -81,6 +92,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/designs'
     | '/concept/editorial'
     | '/concept/kinetic'
     | '/concept/noir'
@@ -89,6 +101,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DesignsRoute: typeof DesignsRoute
   ConceptEditorialRoute: typeof ConceptEditorialRoute
   ConceptKineticRoute: typeof ConceptKineticRoute
   ConceptNoirRoute: typeof ConceptNoirRoute
@@ -102,6 +115,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/designs': {
+      id: '/designs'
+      path: '/designs'
+      fullPath: '/designs'
+      preLoaderRoute: typeof DesignsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/concept/editorial': {
@@ -137,6 +157,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DesignsRoute: DesignsRoute,
   ConceptEditorialRoute: ConceptEditorialRoute,
   ConceptKineticRoute: ConceptKineticRoute,
   ConceptNoirRoute: ConceptNoirRoute,
