@@ -10,7 +10,7 @@ export default defineConfig({
   // When building on Vercel (VERCEL=1 is set automatically), emit Vercel's
   // Build Output API format instead of the default Cloudflare target.
   // Lovable builds are unaffected.
-  ...(process.env.VERCEL ? { nitro: { preset: "vercel" } } : {}),
+  ...(process.env["VERCEL"] ? { nitro: { preset: "vercel" } } : {}),
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
