@@ -7,9 +7,13 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
-  // Vercel needs Nitro's Build Output API bundle. Without this, the shared
-  // config defaults to a Cloudflare bundle and Vercel deploys no routes.
-  ...(process.env["VERCEL"] ? { nitro: { preset: "vercel" } } : {}),
+  // Vercel/Netlify need their own Nitro bundle. Without this, the shared
+  // config defaults to a Cloudflare bundle and the host deploys no routes.
+  ...(process.env["VERCEL"]
+    ? { nitro: { preset: "vercel" } }
+    : process.env["NETLIFY"]
+      ? { nitro: { preset: "netlify" } }
+      : {}),
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
