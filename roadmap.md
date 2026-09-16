@@ -7,3 +7,4 @@
 - [x] Add a sixth original botanical concept inspired by the supplied reference
 - [x] Add Concept G: Earth After Dark, preserving Midnight Noir unchanged
 - [x] Verify Concept G on desktop and mobile with working contact links
+- [x] Align Concept G with Midnight Noir while applying business-focused content
