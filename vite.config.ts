@@ -26,6 +26,7 @@ export default defineConfig({
       { path: "/concept/editorial" },
       { path: "/concept/noir" },
       { path: "/concept/kinetic" },
+      { path: "/concept/botanical" },
     ],
     prerender: { enabled: true, autoStaticPathsDiscovery: false },
   },

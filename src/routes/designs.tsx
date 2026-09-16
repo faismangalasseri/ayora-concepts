@@ -37,15 +37,24 @@ const concepts = [
     text: "Bold modern bento grid with playful motion and kinetic animations.",
     to: "/concept/kinetic",
   },
+  {
+    name: "Concept F",
+    title: "Botanical Pavilion",
+    text: "Immersive botanical elegance with sculptural arches, forest green and gentle reveals.",
+    to: "/concept/botanical",
+    tag: "New",
+  },
 ];
 
 export const Route = createFileRoute("/designs")({
   head: () => ({
     meta: [
       { title: "AYORA — Design Concepts" },
-      { name: "description", content: "Explore the AYORA design concepts: five website directions for at-home Ayurvedic wellness." },
+      { name: "description", content: "Explore six AYORA website directions for Ayurvedic home wellness in the UAE." },
       { property: "og:title", content: "AYORA — Design Concepts" },
-      { property: "og:description", content: "Five website design directions for AYORA home wellness." },
+      { property: "og:description", content: "Six website design directions for AYORA home wellness." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -62,7 +71,7 @@ function Designs() {
               AYORA — Design Review
             </span>
             <h1 className="font-display text-4xl font-medium uppercase leading-none tracking-tight md:text-6xl">
-              Five directions. One brand.
+              Six directions. One brand.
             </h1>
             <p className="mt-6 max-w-[52ch] text-pretty text-sm leading-relaxed text-ink/60">
               Explore each design concept below and let us know which direction feels right for
