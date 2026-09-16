@@ -7,54 +7,59 @@
   <meta name="description" content="AYORA Ayurvedic home wellness services across the UAE.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --pearl: #f7f4ee;
-      --paper: #fffdf8;
-      --forest: #173f32;
-      --forest-soft: #285847;
-      --sage: #a9b7a1;
-      --brass: #a97842;
-      --clay: #caa78f;
-      --ink: #1d2b25;
+      --pearl: #f6f2e9;
+      --paper: #fffaf2;
+      --forest: #202522;
+      --forest-soft: #78917d;
+      --sage: #a7b3a2;
+      --brass: #d34e32;
+      --clay: #d34e32;
+      --ink: #202522;
       --line: color-mix(in srgb, var(--forest) 15%, transparent);
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { margin: 0; background: var(--pearl); color: var(--ink); font-family: "Work Sans", sans-serif; font-weight: 300; }
+    body { margin: 0; background: var(--pearl); color: var(--ink); font-family: "IBM Plex Sans", sans-serif; font-weight: 300; }
     img { display: block; width: 100%; }
     a { color: inherit; text-decoration: none; }
     button, summary { font: inherit; }
-    .serif { font-family: "Instrument Serif", serif; }
+    .serif { font-family: "Libre Baskerville", serif; }
     .shell { width: min(1240px, calc(100% - 40px)); margin-inline: auto; }
     .eyebrow { color: var(--brass); font-size: 10px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; }
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity .85s ease, transform .85s cubic-bezier(.2,.75,.2,1); }
     .reveal.in { opacity: 1; transform: none; }
 
-    nav { position: absolute; inset: 0 0 auto; z-index: 20; color: var(--paper); }
-    .nav-inner { height: 86px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,.22); }
-    .brand { font-family: "Instrument Serif", serif; font-size: 32px; letter-spacing: .16em; }
+    nav { position: absolute; inset: 0 0 auto; z-index: 20; color: var(--ink); background: var(--pearl); }
+    .nav-inner { height: 86px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); }
+    .brand { font-family: "Libre Baskerville", serif; font-size: 32px; letter-spacing: .16em; }
     .nav-links { display: flex; gap: 34px; align-items: center; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
     .nav-links a { opacity: .78; transition: opacity .25s; }
     .nav-links a:hover { opacity: 1; }
-    .nav-cta { border: 1px solid rgba(255,255,255,.55); padding: 12px 18px; }
+    .nav-cta { border: 1px solid var(--ink); padding: 12px 18px; }
 
-    .hero { position: relative; min-height: 94vh; display: grid; align-items: end; overflow: hidden; color: var(--paper); }
-    .hero-bg { position: absolute; inset: 0; height: 100%; object-fit: cover; object-position: center; transform: scale(1.03); animation: settle 2s cubic-bezier(.2,.7,.2,1) forwards; }
-    .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(11,35,27,.78) 0%, rgba(11,35,27,.38) 49%, rgba(11,35,27,.14) 100%), linear-gradient(0deg, rgba(11,35,27,.68), transparent 55%); }
-    .hero-content { position: relative; z-index: 2; padding: 180px 0 78px; }
-    .hero-copy { max-width: 760px; }
-    .hero h1 { margin: 22px 0 20px; font-size: clamp(70px, 10vw, 154px); font-weight: 400; line-height: .78; letter-spacing: 0; }
-    .hero h1 em { display: block; margin-left: clamp(44px, 9vw, 130px); color: #d8c4a8; font-weight: 400; }
-    .hero p { max-width: 550px; margin: 0 0 34px; font-size: 16px; line-height: 1.75; color: rgba(255,255,255,.82); }
-    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
-    .btn { display: inline-flex; min-height: 50px; align-items: center; justify-content: center; gap: 10px; padding: 0 24px; border: 1px solid currentColor; font-size: 11px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; transition: transform .3s, background .3s, color .3s; }
+    .hero { position: relative; min-height: 94vh; overflow: hidden; background: var(--pearl); color: var(--ink); padding-top: 86px; }
+    .hero::before { content: ""; position: absolute; top: 86px; bottom: 0; left: calc(50% - 1px); width: 1px; background: var(--line); z-index: 3; }
+    .hero-grid { position: relative; min-height: calc(94vh - 86px); display: grid; grid-template-columns: 1fr 1fr; }
+    .hero-copy { position: relative; z-index: 4; display: flex; flex-direction: column; justify-content: space-between; padding: 52px 56px 54px 0; }
+    .hero-kicker { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--ink); padding-top: 12px; }
+    .hero-edition { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; }
+    .hero h1 { margin: 52px 0 34px; font-size: clamp(58px, 7.1vw, 108px); font-weight: 400; line-height: .91; letter-spacing: 0; text-transform: none; }
+    .hero h1 span { display: block; color: var(--brass); padding-left: 13%; }
+    .hero-summary { display: grid; grid-template-columns: 86px 1fr; gap: 20px; align-items: start; border-top: 1px solid var(--line); padding-top: 20px; }
+    .hero-summary strong { font-family: "Libre Baskerville", serif; font-size: 38px; font-weight: 400; line-height: 1; }
+    .hero p { max-width: 430px; margin: 0 0 28px; font-size: 14px; line-height: 1.75; color: color-mix(in srgb, var(--ink) 70%, transparent); }
+    .hero-visual { position: relative; min-height: calc(94vh - 86px); overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; height: 100%; object-fit: cover; object-position: 58% center; filter: saturate(.78) contrast(1.03); transform: scale(1.025); animation: settle 1.8s cubic-bezier(.2,.7,.2,1) forwards; }
+    .hero-caption { position: absolute; z-index: 3; left: 0; bottom: 0; width: min(320px, 63%); padding: 18px 22px; background: var(--paper); border-top: 5px solid var(--brass); font-size: 10px; line-height: 1.5; letter-spacing: .08em; text-transform: uppercase; }
+    .hero-index { position: absolute; z-index: 3; top: 24px; right: 24px; width: 54px; height: 54px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.7); color: var(--paper); font: 400 16px "Libre Baskerville",serif; }
+    .actions { display: flex; flex-wrap: wrap; gap: 0; }
+    .btn { display: inline-flex; min-height: 50px; align-items: center; justify-content: center; gap: 10px; padding: 0 24px; border: 1px solid currentColor; font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; transition: transform .25s, background .25s, color .25s; }
     .btn:hover { transform: translateY(-3px); }
-    .btn-light { background: var(--paper); color: var(--forest); border-color: var(--paper); }
-    .btn-ghost { color: var(--paper); border-color: rgba(255,255,255,.5); }
-    .hero-note { position: absolute; z-index: 3; right: 30px; bottom: 32px; writing-mode: vertical-rl; font-size: 9px; letter-spacing: .3em; text-transform: uppercase; opacity: .65; }
-
+    .btn-light { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+    .btn-ghost { color: var(--ink); border-color: var(--ink); border-left: 0; }
     .intro { position: relative; padding: 130px 0 110px; overflow: hidden; }
     .intro-grid { display: grid; grid-template-columns: .82fr 1.3fr; gap: 90px; align-items: start; }
     .intro h2 { margin: 0; max-width: 800px; font-size: clamp(52px, 7vw, 92px); font-weight: 400; line-height: .96; }
@@ -66,14 +71,14 @@
     .promise { background: var(--forest); color: var(--paper); padding: 100px 0; }
     .promise-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 80px; align-items: center; }
     .ritual-frame { position: relative; max-width: 530px; margin: 0 auto; }
-    .ritual-frame::before { content: ""; position: absolute; inset: -18px 18px 18px -18px; border: 1px solid rgba(255,255,255,.2); border-radius: 48% 48% 5px 5px; }
-    .ritual-frame img { position: relative; aspect-ratio: 4/5; object-fit: cover; border-radius: 48% 48% 5px 5px; }
+    .ritual-frame::before { content: "FIELD NOTE / 01"; position: absolute; left: -28px; top: 30px; z-index: 2; padding: 10px 12px; background: var(--brass); color: var(--paper); font-size: 9px; letter-spacing: .18em; transform: rotate(-90deg) translateX(-100%); transform-origin: left top; }
+    .ritual-frame img { position: relative; aspect-ratio: 4/5; object-fit: cover; clip-path: polygon(0 0, 92% 0, 100% 8%, 100% 100%, 0 100%); }
     .promise h2 { margin: 20px 0 28px; font-size: clamp(50px, 6vw, 84px); font-weight: 400; line-height: .95; }
     .promise p { max-width: 520px; color: rgba(255,255,255,.7); line-height: 1.8; }
     .values { display: grid; grid-template-columns: repeat(3,1fr); margin-top: 46px; border-block: 1px solid rgba(255,255,255,.16); }
     .value { padding: 24px 12px 24px 0; }
     .value + .value { padding-left: 18px; border-left: 1px solid rgba(255,255,255,.16); }
-    .value strong { display: block; font-family: "Instrument Serif", serif; font-size: 27px; font-weight: 400; color: #d8c4a8; }
+    .value strong { display: block; font-family: "Libre Baskerville", serif; font-size: 27px; font-weight: 400; color: #d8c4a8; }
     .value span { display: block; margin-top: 5px; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; opacity: .6; }
 
     .services { padding: 120px 0; }
@@ -82,14 +87,14 @@
     .section-head p { justify-self: end; max-width: 420px; line-height: 1.7; color: color-mix(in srgb, var(--ink) 65%, transparent); }
     .service-grid { display: grid; grid-template-columns: 1.12fr .88fr; border-top: 1px solid var(--line); }
     .featured-service { grid-row: span 3; padding: 30px 40px 30px 0; border-right: 1px solid var(--line); }
-    .featured-service img { aspect-ratio: 5/4; object-fit: cover; border-radius: 48% 48% 0 0; }
+    .featured-service img { aspect-ratio: 5/4; object-fit: cover; clip-path: polygon(0 0, 93% 0, 100% 9%, 100% 100%, 0 100%); }
     .featured-service h3 { margin: 26px 0 10px; font-size: 38px; font-weight: 400; }
     .featured-service p { margin: 0; max-width: 560px; line-height: 1.7; color: color-mix(in srgb, var(--ink) 62%, transparent); }
     .service-list { display: grid; }
     .service-item { position: relative; padding: 28px 48px 28px 40px; border-bottom: 1px solid var(--line); transition: background .3s, padding-left .3s; }
     .service-item:hover { background: var(--paper); padding-left: 50px; }
     .service-item small { color: var(--brass); font-size: 9px; letter-spacing: .18em; }
-    .service-item h3 { margin: 8px 0 5px; font-family: "Instrument Serif", serif; font-size: 29px; font-weight: 400; }
+    .service-item h3 { margin: 8px 0 5px; font-family: "Libre Baskerville", serif; font-size: 29px; font-weight: 400; }
     .service-item p { margin: 0; font-size: 13px; line-height: 1.55; color: color-mix(in srgb, var(--ink) 58%, transparent); }
     .service-item::after { content: "↗"; position: absolute; right: 12px; top: 36px; color: var(--brass); }
 
@@ -97,15 +102,15 @@
     .how h2 { margin: 12px 0 58px; font-size: clamp(50px, 6vw, 78px); font-weight: 400; }
     .steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: color-mix(in srgb, var(--forest) 14%, transparent); }
     .step { min-height: 260px; padding: 30px; background: #e5e9df; }
-    .step-num { font-family: "Instrument Serif", serif; font-size: 58px; color: var(--forest-soft); opacity: .35; }
-    .step h3 { margin: 38px 0 10px; font-family: "Instrument Serif", serif; font-size: 26px; font-weight: 400; }
+    .step-num { font-family: "Libre Baskerville", serif; font-size: 58px; color: var(--forest-soft); opacity: .35; }
+    .step h3 { margin: 38px 0 10px; font-family: "Libre Baskerville", serif; font-size: 26px; font-weight: 400; }
     .step p { margin: 0; font-size: 13px; line-height: 1.65; color: color-mix(in srgb, var(--ink) 62%, transparent); }
 
     .for-whom { padding: 110px 0; }
     .for-grid { display: grid; grid-template-columns: .7fr 1.3fr; gap: 80px; }
     .for-whom h2 { margin: 12px 0 0; font-size: clamp(50px, 6vw, 78px); font-weight: 400; line-height: .95; }
     .audiences { display: grid; grid-template-columns: repeat(2,1fr); }
-    .audience { padding: 28px 0; border-bottom: 1px solid var(--line); font-family: "Instrument Serif", serif; font-size: 31px; }
+    .audience { padding: 28px 0; border-bottom: 1px solid var(--line); font-family: "Libre Baskerville", serif; font-size: 31px; }
     .audience:nth-child(odd) { padding-right: 28px; }
     .audience:nth-child(even) { padding-left: 28px; border-left: 1px solid var(--line); }
 
@@ -126,7 +131,7 @@
 
     footer { padding: 55px 0 95px; background: var(--forest); color: var(--paper); border-top: 1px solid rgba(255,255,255,.12); }
     .footer-inner { display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; }
-    .footer-brand { font-family: "Instrument Serif", serif; font-size: clamp(60px, 9vw, 120px); line-height: .7; letter-spacing: .08em; }
+    .footer-brand { font-family: "Libre Baskerville", serif; font-size: clamp(60px, 9vw, 120px); line-height: .7; letter-spacing: .08em; }
     footer p { margin: 0; max-width: 300px; text-align: right; font-size: 10px; line-height: 1.8; letter-spacing: .12em; text-transform: uppercase; opacity: .55; }
 
     .contact-float { position: fixed; right: 22px; bottom: 22px; z-index: 50; display: flex; border: 1px solid color-mix(in srgb, var(--forest) 16%, transparent); background: rgba(255,253,248,.94); box-shadow: 0 15px 45px rgba(23,63,50,.18); backdrop-filter: blur(12px); }
@@ -141,11 +146,15 @@
       .shell { width: min(100% - 28px, 1240px); }
       .nav-inner { height: 72px; }
       .nav-links a:not(.nav-cta) { display: none; }
-      .hero { min-height: 88vh; }
-      .hero-content { padding: 150px 0 70px; }
-      .hero h1 { font-size: clamp(58px, 19vw, 92px); }
-      .hero h1 em { margin-left: 24px; }
-      .hero-note { display: none; }
+      .hero { min-height: auto; padding-top: 72px; }
+      .hero::before { display: none; }
+      .hero-grid { min-height: auto; grid-template-columns: 1fr; }
+      .hero-copy { min-height: 650px; padding: 34px 0 40px; }
+      .hero h1 { margin: 48px 0 60px; font-size: clamp(54px, 16vw, 82px); }
+      .hero h1 span { padding-left: 8%; }
+      .hero-visual { min-height: 72vh; }
+      .hero-summary { grid-template-columns: 54px 1fr; }
+      .hero-summary strong { font-size: 28px; }
       .intro, .services, .for-whom, .faq-book { padding: 82px 0; }
       .intro-grid, .promise-grid, .section-head, .for-grid, .faq-grid { grid-template-columns: 1fr; gap: 38px; }
       .section-head p { justify-self: start; }
@@ -188,19 +197,32 @@
   </nav>
 
   <header class="hero" id="top">
-    <img class="hero-bg" src="/images/botanical-hero.jpg" width="1536" height="1024" alt="AYORA wellness professional preparing a massage space in a bright UAE home">
-    <div class="shell hero-content">
+    <div class="shell hero-grid">
       <div class="hero-copy reveal">
-        <span class="eyebrow" style="color:#e6d2b6">Ayurvedic home wellness · UAE</span>
-        <h1 class="serif">Wellness,<em>where you are.</em></h1>
-        <p>Traditional Ayurvedic care and professional wellness therapy, delivered to your home across Dubai, Abu Dhabi, Sharjah, Ajman and other Emirates.</p>
-        <div class="actions">
-          <a class="btn btn-light" href="#book">Book your session <span>↗</span></a>
-          <a class="btn btn-ghost" href="#services">Explore services</a>
+        <div>
+          <div class="hero-kicker">
+            <span class="eyebrow">Ayurvedic home wellness</span>
+            <span class="hero-edition">UAE · Vol. 01</span>
+          </div>
+          <h1 class="serif">Wellness that <span>comes home.</span></h1>
+        </div>
+        <div class="hero-summary">
+          <strong>01</strong>
+          <div>
+            <p>Traditional Ayurvedic care and professional wellness therapy, delivered across Dubai, Abu Dhabi, Sharjah, Ajman and other Emirates.</p>
+            <div class="actions">
+              <a class="btn btn-light" href="#book">Book a session <span>↗</span></a>
+              <a class="btn btn-ghost" href="#services">View rituals</a>
+            </div>
+          </div>
         </div>
       </div>
+      <div class="hero-visual">
+        <img class="hero-bg" src="/images/botanical-hero.jpg" width="1536" height="1024" alt="AYORA wellness professional preparing a massage space in a bright UAE home">
+        <span class="hero-index">A</span>
+        <p class="hero-caption">A private wellness ritual, prepared in the space where you feel most at ease.</p>
+      </div>
     </div>
-    <span class="hero-note">Natural · Personal · Convenient</span>
   </header>
 
   <main>
