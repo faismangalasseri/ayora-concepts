@@ -5,3 +5,5 @@
 - [x] Prepare design previews for deployment on a separate client URL
 - [x] Add preview-only WhatsApp and call controls to all five concepts
 - [x] Add a sixth original botanical concept inspired by the supplied reference
+- [ ] Add Concept G: Earth After Dark, preserving Midnight Noir unchanged
+- [ ] Verify Concept G on desktop and mobile with working contact links
