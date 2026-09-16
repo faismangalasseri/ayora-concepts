@@ -1,9 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { MessageCircle, Phone } from "lucide-react";
 
 import heroImg from "@/assets/hero.jpg";
 import abhyangaImg from "@/assets/service-abhyanga.jpg";
 import headImg from "@/assets/service-head.jpg";
 import relaxImg from "@/assets/service-relax.jpg";
+import { Button } from "@/components/ui/button";
 
 const WHATSAPP_URL =
   "https://wa.me/971500000000?text=" +
@@ -318,6 +320,37 @@ function Index() {
           </p>
         </div>
       </footer>
+
+      <aside
+        aria-label="Sample contact options"
+        className="fixed bottom-5 right-4 z-50 flex flex-col items-end gap-2 sm:bottom-7 sm:right-7"
+      >
+        <span className="rounded-sm border border-ink/10 bg-ivory/95 px-2 py-1 text-[9px] font-medium uppercase tracking-[0.16em] text-ink/50 shadow-sm backdrop-blur-sm">
+          Preview
+        </span>
+        <div className="flex overflow-hidden rounded-sm border border-ink/10 bg-ivory/95 shadow-xl shadow-ink/10 backdrop-blur-md">
+          <Button
+            type="button"
+            variant="ghost"
+            aria-label="WhatsApp sample — preview only"
+            title="WhatsApp — preview only"
+            className="h-12 rounded-none border-r border-ink/10 px-4 text-ink hover:bg-linen hover:text-gold"
+          >
+            <MessageCircle aria-hidden="true" />
+            <span className="hidden text-xs uppercase tracking-wide sm:inline">WhatsApp</span>
+          </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            aria-label="Call sample — preview only"
+            title="Call — preview only"
+            className="h-12 rounded-none px-4 text-ink hover:bg-linen hover:text-gold"
+          >
+            <Phone aria-hidden="true" />
+            <span className="hidden text-xs uppercase tracking-wide sm:inline">Call</span>
+          </Button>
+        </div>
+      </aside>
     </div>
   );
 }
