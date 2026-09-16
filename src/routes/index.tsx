@@ -322,33 +322,30 @@ function Index() {
       </footer>
 
       <aside
-        aria-label="Sample contact options"
+        aria-label="Contact AYORA"
         className="fixed bottom-5 right-4 z-50 flex flex-col items-end gap-2 sm:bottom-7 sm:right-7"
       >
-        <span className="rounded-sm border border-ink/10 bg-ivory/95 px-2 py-1 text-[9px] font-medium uppercase tracking-[0.16em] text-ink/50 shadow-sm backdrop-blur-sm">
-          Preview
-        </span>
         <div className="flex overflow-hidden rounded-sm border border-ink/10 bg-ivory/95 shadow-xl shadow-ink/10 backdrop-blur-md">
-          <Button
-            type="button"
-            variant="ghost"
-            aria-label="WhatsApp sample — preview only"
-            title="WhatsApp — preview only"
-            className="h-12 rounded-none border-r border-ink/10 px-4 text-ink hover:bg-linen hover:text-gold"
+          <a
+            href="https://wa.me/971501234567?text=Hello%20AYORA!%20I%27d%20like%20to%20book%20a%20home%20massage%20session."
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Chat with AYORA on WhatsApp"
+            title="Chat with AYORA on WhatsApp"
+            className="flex h-12 items-center gap-2 rounded-none border-r border-ink/10 px-4 text-ink transition-colors hover:bg-linen hover:text-gold"
           >
-            <MessageCircle aria-hidden="true" />
+            <MessageCircle aria-hidden="true" className="h-4 w-4" />
             <span className="hidden text-xs uppercase tracking-wide sm:inline">WhatsApp</span>
-          </Button>
-          <Button
-            type="button"
-            variant="ghost"
-            aria-label="Call sample — preview only"
-            title="Call — preview only"
-            className="h-12 rounded-none px-4 text-ink hover:bg-linen hover:text-gold"
+          </a>
+          <a
+            href="tel:+971501234567"
+            aria-label="Call AYORA"
+            title="Call AYORA"
+            className="flex h-12 items-center gap-2 rounded-none px-4 text-ink transition-colors hover:bg-linen hover:text-gold"
           >
-            <Phone aria-hidden="true" />
+            <Phone aria-hidden="true" className="h-4 w-4" />
             <span className="hidden text-xs uppercase tracking-wide sm:inline">Call</span>
-          </Button>
+          </a>
         </div>
       </aside>
     </div>
