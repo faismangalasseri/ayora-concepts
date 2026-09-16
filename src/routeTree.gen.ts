@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DesignsRouteImport } from './routes/designs'
 import { Route as ConceptBotanicalRouteImport } from './routes/concept/botanical'
+import { Route as ConceptEarthNoirRouteImport } from './routes/concept/earth-noir'
 import { Route as ConceptEditorialRouteImport } from './routes/concept/editorial'
 import { Route as ConceptKineticRouteImport } from './routes/concept/kinetic'
 import { Route as ConceptNoirRouteImport } from './routes/concept/noir'
@@ -30,6 +31,11 @@ const DesignsRoute = DesignsRouteImport.update({
 const ConceptBotanicalRoute = ConceptBotanicalRouteImport.update({
   id: '/concept/botanical',
   path: '/concept/botanical',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConceptEarthNoirRoute = ConceptEarthNoirRouteImport.update({
+  id: '/concept/earth-noir',
+  path: '/concept/earth-noir',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ConceptEditorialRoute = ConceptEditorialRouteImport.update({
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/designs': typeof DesignsRoute
   '/concept/botanical': typeof ConceptBotanicalRoute
+  '/concept/earth-noir': typeof ConceptEarthNoirRoute
   '/concept/editorial': typeof ConceptEditorialRoute
   '/concept/kinetic': typeof ConceptKineticRoute
   '/concept/noir': typeof ConceptNoirRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/designs': typeof DesignsRoute
   '/concept/botanical': typeof ConceptBotanicalRoute
+  '/concept/earth-noir': typeof ConceptEarthNoirRoute
   '/concept/editorial': typeof ConceptEditorialRoute
   '/concept/kinetic': typeof ConceptKineticRoute
   '/concept/noir': typeof ConceptNoirRoute
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/designs': typeof DesignsRoute
   '/concept/botanical': typeof ConceptBotanicalRoute
+  '/concept/earth-noir': typeof ConceptEarthNoirRoute
   '/concept/editorial': typeof ConceptEditorialRoute
   '/concept/kinetic': typeof ConceptKineticRoute
   '/concept/noir': typeof ConceptNoirRoute
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/designs'
     | '/concept/botanical'
+    | '/concept/earth-noir'
     | '/concept/editorial'
     | '/concept/kinetic'
     | '/concept/noir'
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
     | '/'
     | '/designs'
     | '/concept/botanical'
+    | '/concept/earth-noir'
     | '/concept/editorial'
     | '/concept/kinetic'
     | '/concept/noir'
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/designs'
     | '/concept/botanical'
+    | '/concept/earth-noir'
     | '/concept/editorial'
     | '/concept/kinetic'
     | '/concept/noir'
@@ -115,6 +127,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DesignsRoute: typeof DesignsRoute
   ConceptBotanicalRoute: typeof ConceptBotanicalRoute
+  ConceptEarthNoirRoute: typeof ConceptEarthNoirRoute
   ConceptEditorialRoute: typeof ConceptEditorialRoute
   ConceptKineticRoute: typeof ConceptKineticRoute
   ConceptNoirRoute: typeof ConceptNoirRoute
@@ -142,6 +155,13 @@ declare module '@tanstack/react-router' {
       path: '/concept/botanical'
       fullPath: '/concept/botanical'
       preLoaderRoute: typeof ConceptBotanicalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/concept/earth-noir': {
+      id: '/concept/earth-noir'
+      path: '/concept/earth-noir'
+      fullPath: '/concept/earth-noir'
+      preLoaderRoute: typeof ConceptEarthNoirRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/concept/editorial': {
@@ -179,6 +199,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DesignsRoute: DesignsRoute,
   ConceptBotanicalRoute: ConceptBotanicalRoute,
+  ConceptEarthNoirRoute: ConceptEarthNoirRoute,
   ConceptEditorialRoute: ConceptEditorialRoute,
   ConceptKineticRoute: ConceptKineticRoute,
   ConceptNoirRoute: ConceptNoirRoute,
