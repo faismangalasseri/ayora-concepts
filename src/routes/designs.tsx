@@ -1,4 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { MessageCircle, Phone } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 
 import heroImg from "@/assets/hero.jpg";
 
