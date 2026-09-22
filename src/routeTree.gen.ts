@@ -10,7 +10,10 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as DesignsRouteImport } from './routes/designs'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as ConceptBotanicalRouteImport } from './routes/concept/botanical'
 import { Route as ConceptEarthNoirRouteImport } from './routes/concept/earth-noir'
 import { Route as ConceptEditorialRouteImport } from './routes/concept/editorial'
@@ -18,15 +21,30 @@ import { Route as ConceptKineticRouteImport } from './routes/concept/kinetic'
 import { Route as ConceptNoirRouteImport } from './routes/concept/noir'
 import { Route as ConceptNoirBookRouteImport } from './routes/concept.noir-book'
 import { Route as ConceptSerifRouteImport } from './routes/concept/serif'
+import { Route as ApiPublicBookingsRouteImport } from './routes/api/public/bookings'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DesignsRoute = DesignsRouteImport.update({
   id: '/designs',
   path: '/designs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin/login',
+  path: '/admin/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ConceptBotanicalRoute = ConceptBotanicalRouteImport.update({
@@ -64,10 +82,17 @@ const ConceptSerifRoute = ConceptSerifRouteImport.update({
   path: '/concept/serif',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicBookingsRoute = ApiPublicBookingsRouteImport.update({
+  id: '/api/public/bookings',
+  path: '/api/public/bookings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/designs': typeof DesignsRoute
+  '/admin': typeof AuthenticatedAdminRoute
+  '/admin/login': typeof AdminLoginRoute
   '/concept/botanical': typeof ConceptBotanicalRoute
   '/concept/earth-noir': typeof ConceptEarthNoirRoute
   '/concept/editorial': typeof ConceptEditorialRoute
@@ -75,10 +100,13 @@ export interface FileRoutesByFullPath {
   '/concept/noir': typeof ConceptNoirRoute
   '/concept/noir-book': typeof ConceptNoirBookRoute
   '/concept/serif': typeof ConceptSerifRoute
+  '/api/public/bookings': typeof ApiPublicBookingsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/designs': typeof DesignsRoute
+  '/admin': typeof AuthenticatedAdminRoute
+  '/admin/login': typeof AdminLoginRoute
   '/concept/botanical': typeof ConceptBotanicalRoute
   '/concept/earth-noir': typeof ConceptEarthNoirRoute
   '/concept/editorial': typeof ConceptEditorialRoute
@@ -86,11 +114,15 @@ export interface FileRoutesByTo {
   '/concept/noir': typeof ConceptNoirRoute
   '/concept/noir-book': typeof ConceptNoirBookRoute
   '/concept/serif': typeof ConceptSerifRoute
+  '/api/public/bookings': typeof ApiPublicBookingsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/designs': typeof DesignsRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/admin/login': typeof AdminLoginRoute
   '/concept/botanical': typeof ConceptBotanicalRoute
   '/concept/earth-noir': typeof ConceptEarthNoirRoute
   '/concept/editorial': typeof ConceptEditorialRoute
@@ -98,12 +130,15 @@ export interface FileRoutesById {
   '/concept/noir': typeof ConceptNoirRoute
   '/concept/noir-book': typeof ConceptNoirBookRoute
   '/concept/serif': typeof ConceptSerifRoute
+  '/api/public/bookings': typeof ApiPublicBookingsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/designs'
+    | '/admin'
+    | '/admin/login'
     | '/concept/botanical'
     | '/concept/earth-noir'
     | '/concept/editorial'
@@ -111,10 +146,13 @@ export interface FileRouteTypes {
     | '/concept/noir'
     | '/concept/noir-book'
     | '/concept/serif'
+    | '/api/public/bookings'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/designs'
+    | '/admin'
+    | '/admin/login'
     | '/concept/botanical'
     | '/concept/earth-noir'
     | '/concept/editorial'
@@ -122,10 +160,14 @@ export interface FileRouteTypes {
     | '/concept/noir'
     | '/concept/noir-book'
     | '/concept/serif'
+    | '/api/public/bookings'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/designs'
+    | '/_authenticated/admin'
+    | '/admin/login'
     | '/concept/botanical'
     | '/concept/earth-noir'
     | '/concept/editorial'
@@ -133,11 +175,14 @@ export interface FileRouteTypes {
     | '/concept/noir'
     | '/concept/noir-book'
     | '/concept/serif'
+    | '/api/public/bookings'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   DesignsRoute: typeof DesignsRoute
+  AdminLoginRoute: typeof AdminLoginRoute
   ConceptBotanicalRoute: typeof ConceptBotanicalRoute
   ConceptEarthNoirRoute: typeof ConceptEarthNoirRoute
   ConceptEditorialRoute: typeof ConceptEditorialRoute
@@ -145,6 +190,7 @@ export interface RootRouteChildren {
   ConceptNoirRoute: typeof ConceptNoirRoute
   ConceptNoirBookRoute: typeof ConceptNoirBookRoute
   ConceptSerifRoute: typeof ConceptSerifRoute
+  ApiPublicBookingsRoute: typeof ApiPublicBookingsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -156,11 +202,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/designs': {
       id: '/designs'
       path: '/designs'
       fullPath: '/designs'
       preLoaderRoute: typeof DesignsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/concept/botanical': {
@@ -212,12 +279,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConceptSerifRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/bookings': {
+      id: '/api/public/bookings'
+      path: '/api/public/bookings'
+      fullPath: '/api/public/bookings'
+      preLoaderRoute: typeof ApiPublicBookingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   DesignsRoute: DesignsRoute,
+  AdminLoginRoute: AdminLoginRoute,
   ConceptBotanicalRoute: ConceptBotanicalRoute,
   ConceptEarthNoirRoute: ConceptEarthNoirRoute,
   ConceptEditorialRoute: ConceptEditorialRoute,
@@ -225,6 +312,7 @@ const rootRouteChildren: RootRouteChildren = {
   ConceptNoirRoute: ConceptNoirRoute,
   ConceptNoirBookRoute: ConceptNoirBookRoute,
   ConceptSerifRoute: ConceptSerifRoute,
+  ApiPublicBookingsRoute: ApiPublicBookingsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
