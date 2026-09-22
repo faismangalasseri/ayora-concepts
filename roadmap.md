@@ -11,3 +11,4 @@
 - [x] Finalize Midnight Noir as the selected AYORA direction
 - [x] Expand the service catalogue and add separate male/female availability
 - [x] Add and verify the simple WhatsApp booking journey
+- [x] Upgrade Midnight Noir services with professional imagery and concise benefit-led copy
