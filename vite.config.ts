@@ -25,6 +25,7 @@ export default defineConfig({
       { path: "/concept/serif" },
       { path: "/concept/editorial" },
       { path: "/concept/noir" },
+      { path: "/concept/noir/book" },
       { path: "/concept/kinetic" },
       { path: "/concept/botanical" },
       { path: "/concept/earth-noir" },

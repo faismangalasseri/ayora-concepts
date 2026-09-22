@@ -7,6 +7,8 @@ export const Route = createFileRoute("/concept/noir")({
       { name: "description", content: "AYORA design concept D: a dark, animated midnight look for at-home Ayurvedic wellness in the UAE." },
       { property: "og:title", content: "AYORA — Design Concept D" },
       { property: "og:description", content: "Dark, animated midnight design direction for AYORA home wellness." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { name: "robots", content: "noindex" },
     ],
   }),
