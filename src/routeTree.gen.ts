@@ -10,7 +10,10 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as DesignsRouteImport } from './routes/designs'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as ConceptBotanicalRouteImport } from './routes/concept/botanical'
 import { Route as ConceptEarthNoirRouteImport } from './routes/concept/earth-noir'
 import { Route as ConceptEditorialRouteImport } from './routes/concept/editorial'
@@ -25,9 +28,23 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DesignsRoute = DesignsRouteImport.update({
   id: '/designs',
   path: '/designs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin/login',
+  path: '/admin/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ConceptBotanicalRoute = ConceptBotanicalRouteImport.update({
@@ -74,6 +91,8 @@ const ApiPublicBookingsRoute = ApiPublicBookingsRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/designs': typeof DesignsRoute
+  '/admin': typeof AuthenticatedAdminRoute
+  '/admin/login': typeof AdminLoginRoute
   '/concept/botanical': typeof ConceptBotanicalRoute
   '/concept/earth-noir': typeof ConceptEarthNoirRoute
   '/concept/editorial': typeof ConceptEditorialRoute
@@ -86,6 +105,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/designs': typeof DesignsRoute
+  '/admin': typeof AuthenticatedAdminRoute
+  '/admin/login': typeof AdminLoginRoute
   '/concept/botanical': typeof ConceptBotanicalRoute
   '/concept/earth-noir': typeof ConceptEarthNoirRoute
   '/concept/editorial': typeof ConceptEditorialRoute
@@ -98,7 +119,10 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/designs': typeof DesignsRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/admin/login': typeof AdminLoginRoute
   '/concept/botanical': typeof ConceptBotanicalRoute
   '/concept/earth-noir': typeof ConceptEarthNoirRoute
   '/concept/editorial': typeof ConceptEditorialRoute
@@ -113,6 +137,8 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/designs'
+    | '/admin'
+    | '/admin/login'
     | '/concept/botanical'
     | '/concept/earth-noir'
     | '/concept/editorial'
@@ -125,6 +151,8 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/designs'
+    | '/admin'
+    | '/admin/login'
     | '/concept/botanical'
     | '/concept/earth-noir'
     | '/concept/editorial'
@@ -136,7 +164,10 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/designs'
+    | '/_authenticated/admin'
+    | '/admin/login'
     | '/concept/botanical'
     | '/concept/earth-noir'
     | '/concept/editorial'
@@ -149,7 +180,9 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   DesignsRoute: typeof DesignsRoute
+  AdminLoginRoute: typeof AdminLoginRoute
   ConceptBotanicalRoute: typeof ConceptBotanicalRoute
   ConceptEarthNoirRoute: typeof ConceptEarthNoirRoute
   ConceptEditorialRoute: typeof ConceptEditorialRoute
@@ -169,11 +202,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/designs': {
       id: '/designs'
       path: '/designs'
       fullPath: '/designs'
       preLoaderRoute: typeof DesignsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/concept/botanical': {
@@ -235,9 +289,22 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   DesignsRoute: DesignsRoute,
+  AdminLoginRoute: AdminLoginRoute,
   ConceptBotanicalRoute: ConceptBotanicalRoute,
   ConceptEarthNoirRoute: ConceptEarthNoirRoute,
   ConceptEditorialRoute: ConceptEditorialRoute,
