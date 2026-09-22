@@ -30,6 +30,7 @@ const concepts = [
     title: "Midnight Noir",
     text: "Dark, moody and animated — glowing gold accents on deep charcoal.",
     to: "/concept/noir",
+    tag: "Selected",
   },
   {
     name: "Concept E",
@@ -48,7 +49,6 @@ const concepts = [
     title: "Earth After Dark",
     text: "Forest, ivory and terracotta with authentic treatment imagery and a sharper editorial voice.",
     to: "/concept/earth-noir",
-    tag: "New",
   },
 ];
 
