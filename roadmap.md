@@ -8,3 +8,6 @@
 - [x] Add Concept G: Earth After Dark, preserving Midnight Noir unchanged
 - [x] Verify Concept G on desktop and mobile with working contact links
 - [x] Align Concept G with Midnight Noir while applying business-focused content
+- [ ] Finalize Midnight Noir as the selected AYORA direction
+- [ ] Expand the service catalogue and add separate male/female availability
+- [ ] Add and verify the simple WhatsApp booking journey
