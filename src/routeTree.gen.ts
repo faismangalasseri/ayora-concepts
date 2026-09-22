@@ -16,6 +16,7 @@ import { Route as ConceptEarthNoirRouteImport } from './routes/concept/earth-noi
 import { Route as ConceptEditorialRouteImport } from './routes/concept/editorial'
 import { Route as ConceptKineticRouteImport } from './routes/concept/kinetic'
 import { Route as ConceptNoirRouteImport } from './routes/concept/noir'
+import { Route as ConceptNoirBookRouteImport } from './routes/concept.noir-book'
 import { Route as ConceptSerifRouteImport } from './routes/concept/serif'
 
 const IndexRoute = IndexRouteImport.update({
@@ -53,6 +54,11 @@ const ConceptNoirRoute = ConceptNoirRouteImport.update({
   path: '/concept/noir',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConceptNoirBookRoute = ConceptNoirBookRouteImport.update({
+  id: '/concept/noir-book',
+  path: '/concept/noir-book',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ConceptSerifRoute = ConceptSerifRouteImport.update({
   id: '/concept/serif',
   path: '/concept/serif',
@@ -67,6 +73,7 @@ export interface FileRoutesByFullPath {
   '/concept/editorial': typeof ConceptEditorialRoute
   '/concept/kinetic': typeof ConceptKineticRoute
   '/concept/noir': typeof ConceptNoirRoute
+  '/concept/noir-book': typeof ConceptNoirBookRoute
   '/concept/serif': typeof ConceptSerifRoute
 }
 export interface FileRoutesByTo {
@@ -77,6 +84,7 @@ export interface FileRoutesByTo {
   '/concept/editorial': typeof ConceptEditorialRoute
   '/concept/kinetic': typeof ConceptKineticRoute
   '/concept/noir': typeof ConceptNoirRoute
+  '/concept/noir-book': typeof ConceptNoirBookRoute
   '/concept/serif': typeof ConceptSerifRoute
 }
 export interface FileRoutesById {
@@ -88,6 +96,7 @@ export interface FileRoutesById {
   '/concept/editorial': typeof ConceptEditorialRoute
   '/concept/kinetic': typeof ConceptKineticRoute
   '/concept/noir': typeof ConceptNoirRoute
+  '/concept/noir-book': typeof ConceptNoirBookRoute
   '/concept/serif': typeof ConceptSerifRoute
 }
 export interface FileRouteTypes {
@@ -100,6 +109,7 @@ export interface FileRouteTypes {
     | '/concept/editorial'
     | '/concept/kinetic'
     | '/concept/noir'
+    | '/concept/noir-book'
     | '/concept/serif'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -110,6 +120,7 @@ export interface FileRouteTypes {
     | '/concept/editorial'
     | '/concept/kinetic'
     | '/concept/noir'
+    | '/concept/noir-book'
     | '/concept/serif'
   id:
     | '__root__'
@@ -120,6 +131,7 @@ export interface FileRouteTypes {
     | '/concept/editorial'
     | '/concept/kinetic'
     | '/concept/noir'
+    | '/concept/noir-book'
     | '/concept/serif'
   fileRoutesById: FileRoutesById
 }
@@ -131,6 +143,7 @@ export interface RootRouteChildren {
   ConceptEditorialRoute: typeof ConceptEditorialRoute
   ConceptKineticRoute: typeof ConceptKineticRoute
   ConceptNoirRoute: typeof ConceptNoirRoute
+  ConceptNoirBookRoute: typeof ConceptNoirBookRoute
   ConceptSerifRoute: typeof ConceptSerifRoute
 }
 
@@ -185,6 +198,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConceptNoirRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/concept/noir-book': {
+      id: '/concept/noir-book'
+      path: '/concept/noir-book'
+      fullPath: '/concept/noir-book'
+      preLoaderRoute: typeof ConceptNoirBookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/concept/serif': {
       id: '/concept/serif'
       path: '/concept/serif'
@@ -203,6 +223,7 @@ const rootRouteChildren: RootRouteChildren = {
   ConceptEditorialRoute: ConceptEditorialRoute,
   ConceptKineticRoute: ConceptKineticRoute,
   ConceptNoirRoute: ConceptNoirRoute,
+  ConceptNoirBookRoute: ConceptNoirBookRoute,
   ConceptSerifRoute: ConceptSerifRoute,
 }
 export const routeTree = rootRouteImport
