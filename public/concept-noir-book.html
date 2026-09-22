@@ -95,7 +95,21 @@
     if (!professional()) { document.querySelector('[data-error="professional"]').classList.remove('hidden'); valid = false; }
     if (!valid) { const invalid = form.querySelector(':invalid'); if (invalid) invalid.focus(); return; }
     const message = ['Hello AYORA, I would like to request a home wellness session.', '', 'Service: ' + clean(fields.service.value, 80), 'Preferred professional: ' + professional(), 'Preferred date: ' + fields.date.value, 'Preferred time: ' + fields.time.value, 'Location: ' + clean(fields.location.value, 120), 'Name: ' + clean(fields.name.value, 80), 'Phone: ' + clean(fields.phone.value, 20), '', 'Please confirm availability.'].join('\n');
-    window.open('https://wa.me/971501234567?text=' + encodeURIComponent(message), '_blank', 'noopener,noreferrer');
+    const whatsappWindow = window.open('https://wa.me/971501234567?text=' + encodeURIComponent(message), '_blank', 'noopener,noreferrer');
+    if (!whatsappWindow) window.location.href = 'https://wa.me/971501234567?text=' + encodeURIComponent(message);
+    fetch('/api/public/bookings', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        service: clean(fields.service.value, 120),
+        professional_preference: professional(),
+        booking_date: fields.date.value,
+        time_slot: fields.time.value,
+        location: clean(fields.location.value, 160),
+        customer_name: clean(fields.name.value, 80),
+        phone: clean(fields.phone.value, 25)
+      })
+    }).catch(() => {});
   });
   updateSummary();
 </script>
