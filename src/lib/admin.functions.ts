@@ -43,8 +43,10 @@ export const updateBooking = createServerFn({ method: "POST" })
       .parse(input),
   )
   .handler(async ({ data, context }) => {
-    const { id, ...patch } = data;
-    const { error } = await context.supabase.from("bookings").update(patch).eq("id", id);
+    const patch: { status?: string; admin_note?: string | null } = {};
+    if (data.status !== undefined) patch.status = data.status;
+    if (data.admin_note !== undefined) patch.admin_note = data.admin_note;
+    const { error } = await context.supabase.from("bookings").update(patch).eq("id", data.id);
     if (error) throw new Error(error.message);
     return { ok: true };
   });
