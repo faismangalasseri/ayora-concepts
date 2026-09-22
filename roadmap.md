@@ -10,4 +10,4 @@
 - [x] Align Concept G with Midnight Noir while applying business-focused content
 - [x] Finalize Midnight Noir as the selected AYORA direction
 - [x] Expand the service catalogue and add separate male/female availability
-- [ ] Add and verify the simple WhatsApp booking journey
+- [x] Add and verify the simple WhatsApp booking journey
