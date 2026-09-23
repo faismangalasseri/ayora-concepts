@@ -57,17 +57,17 @@ function AdminLogin() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[#0B0D0C] px-6 py-16 text-[#E8E6E1]">
-      <div className="w-full max-w-sm">
-        <p className="text-[11px] uppercase tracking-[0.35em] text-[#C7A867]">AYORA</p>
-        <h1 className="mt-3 text-2xl font-semibold">Staff area</h1>
-        <p className="mt-2 text-sm text-[#E8E6E1]/50">
+    <main className="flex min-h-screen items-center justify-center bg-slate-50 px-6 py-16 text-slate-900">
+      <div className="w-full max-w-sm rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-400">AYORA</p>
+        <h1 className="mt-3 text-2xl font-semibold tracking-tight">Staff area</h1>
+        <p className="mt-2 text-sm text-slate-500">
           {mode === "signin" ? "Sign in to manage bookings." : "Create a staff account with your access code."}
         </p>
 
-        <form onSubmit={handleSubmit} className="mt-8 space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="email" className="text-xs uppercase tracking-[0.2em] text-[#E8E6E1]/60">Email</Label>
+        <form onSubmit={handleSubmit} className="mt-7 space-y-4">
+          <div className="space-y-1.5">
+            <Label htmlFor="email" className="text-sm font-medium text-slate-700">Email</Label>
             <Input
               id="email"
               type="email"
@@ -75,12 +75,12 @@ function AdminLogin() {
               autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="border-white/10 bg-white/5 text-[#E8E6E1]"
+              className="border-slate-300 bg-white text-slate-900"
             />
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="password" className="text-xs uppercase tracking-[0.2em] text-[#E8E6E1]/60">Password</Label>
+          <div className="space-y-1.5">
+            <Label htmlFor="password" className="text-sm font-medium text-slate-700">Password</Label>
             <Input
               id="password"
               type="password"
@@ -89,27 +89,27 @@ function AdminLogin() {
               autoComplete={mode === "signin" ? "current-password" : "new-password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="border-white/10 bg-white/5 text-[#E8E6E1]"
+              className="border-slate-300 bg-white text-slate-900"
             />
           </div>
 
           {mode === "signup" && (
-            <div className="space-y-2">
-              <Label htmlFor="code" className="text-xs uppercase tracking-[0.2em] text-[#E8E6E1]/60">Staff access code</Label>
+            <div className="space-y-1.5">
+              <Label htmlFor="code" className="text-sm font-medium text-slate-700">Staff access code</Label>
               <Input
                 id="code"
                 required
                 value={accessCode}
                 onChange={(e) => setAccessCode(e.target.value)}
-                className="border-white/10 bg-white/5 text-[#E8E6E1]"
+                className="border-slate-300 bg-white text-slate-900"
               />
             </div>
           )}
 
-          {error && <p className="text-sm text-[#E4795B]">{error}</p>}
-          {notice && <p className="text-sm text-[#C7A867]">{notice}</p>}
+          {error && <p className="text-sm text-red-600">{error}</p>}
+          {notice && <p className="text-sm text-emerald-600">{notice}</p>}
 
-          <Button type="submit" disabled={busy} className="w-full bg-[#C7A867] text-[#0B0D0C] hover:bg-[#d8bb7c]">
+          <Button type="submit" disabled={busy} className="w-full bg-slate-900 text-white hover:bg-slate-800">
             {busy ? "Please wait…" : mode === "signin" ? "Sign in" : "Create account"}
           </Button>
         </form>
@@ -121,7 +121,7 @@ function AdminLogin() {
             setError(null);
             setNotice(null);
           }}
-          className="mt-6 text-xs uppercase tracking-[0.2em] text-[#E8E6E1]/45 underline-offset-4 hover:underline"
+          className="mt-6 text-sm font-medium text-slate-500 underline-offset-4 hover:text-slate-900 hover:underline"
         >
           {mode === "signin" ? "Add a staff account" : "Back to sign in"}
         </button>

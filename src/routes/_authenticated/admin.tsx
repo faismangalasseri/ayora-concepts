@@ -10,6 +10,13 @@ import { Textarea } from "@/components/ui/textarea";
 
 const STATUSES = ["pending", "confirmed", "completed", "cancelled"] as const;
 
+const STATUS_STYLES: Record<string, string> = {
+  pending: "bg-amber-50 text-amber-700 border-amber-200",
+  confirmed: "bg-emerald-50 text-emerald-700 border-emerald-200",
+  completed: "bg-slate-100 text-slate-600 border-slate-200",
+  cancelled: "bg-red-50 text-red-600 border-red-200",
+};
+
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
     meta: [
@@ -69,37 +76,57 @@ function AdminBookings() {
 
   const counts = useMemo(() => {
     const all: Booking[] = data?.bookings ?? [];
+    const by = (s: string) => all.filter((b) => b.status === s).length;
     return {
       total: all.length,
-      pending: all.filter((b) => b.status === "pending").length,
+      pending: by("pending"),
+      confirmed: by("confirmed"),
+      completed: by("completed"),
     };
   }, [data]);
 
   return (
-    <main className="min-h-screen bg-[#0B0D0C] px-4 py-10 text-[#E8E6E1] sm:px-8">
-      <div className="mx-auto max-w-5xl">
-        <header className="flex flex-wrap items-end justify-between gap-4">
+    <div className="min-h-screen bg-slate-50 text-slate-900">
+      <header className="border-b border-slate-200 bg-white">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-4 sm:px-8">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.35em] text-[#C7A867]">AYORA</p>
-            <h1 className="mt-2 text-2xl font-semibold">Bookings</h1>
-            <p className="mt-1 text-sm text-[#E8E6E1]/50">
-              {counts.total} total · {counts.pending} waiting for a reply
-            </p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-400">AYORA</p>
+            <h1 className="mt-1 text-lg font-semibold tracking-tight">Bookings dashboard</h1>
           </div>
-          <Button variant="outline" onClick={signOut} className="border-white/15 bg-transparent text-[#E8E6E1] hover:bg-white/10">
+          <Button
+            variant="outline"
+            onClick={signOut}
+            className="border-slate-300 bg-white text-slate-700 hover:bg-slate-50"
+          >
             Sign out
           </Button>
-        </header>
+        </div>
+      </header>
 
-        <div className="mt-8 flex flex-wrap items-center gap-2">
+      <main className="mx-auto max-w-6xl px-4 py-8 sm:px-8">
+        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+          {[
+            { label: "Total bookings", value: counts.total },
+            { label: "Pending", value: counts.pending },
+            { label: "Confirmed", value: counts.confirmed },
+            { label: "Completed", value: counts.completed },
+          ].map((card) => (
+            <div key={card.label} className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+              <p className="text-xs font-medium uppercase tracking-wide text-slate-500">{card.label}</p>
+              <p className="mt-2 text-2xl font-semibold tabular-nums">{card.value}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-8 flex flex-wrap items-center gap-2 rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
           {(["all", ...STATUSES] as const).map((s) => (
             <button
               key={s}
               onClick={() => setStatusFilter(s)}
-              className={`rounded-full border px-4 py-1.5 text-xs uppercase tracking-[0.15em] transition ${
+              className={`rounded-lg border px-3 py-1.5 text-sm font-medium capitalize transition ${
                 statusFilter === s
-                  ? "border-[#C7A867] bg-[#C7A867] text-[#0B0D0C]"
-                  : "border-white/12 text-[#E8E6E1]/60 hover:text-[#E8E6E1]"
+                  ? "border-slate-900 bg-slate-900 text-white"
+                  : "border-slate-200 bg-white text-slate-600 hover:bg-slate-50"
               }`}
             >
               {s}
@@ -109,72 +136,87 @@ function AdminBookings() {
             type="date"
             value={dateFilter}
             onChange={(e) => setDateFilter(e.target.value)}
-            className="ml-auto w-auto border-white/10 bg-white/5 text-[#E8E6E1]"
+            className="ml-auto w-auto border-slate-300 bg-white text-slate-900"
           />
           {dateFilter && (
-            <button onClick={() => setDateFilter("")} className="text-xs uppercase tracking-[0.15em] text-[#E8E6E1]/50 hover:text-[#E8E6E1]">
+            <button
+              onClick={() => setDateFilter("")}
+              className="text-sm font-medium text-slate-500 hover:text-slate-900"
+            >
               Clear date
             </button>
           )}
         </div>
 
-        {isLoading && <p className="mt-10 text-sm text-[#E8E6E1]/50">Loading bookings…</p>}
+        {isLoading && <p className="mt-10 text-sm text-slate-500">Loading bookings…</p>}
         {error && (
-          <p className="mt-10 text-sm text-[#E4795B]">
+          <p className="mt-10 text-sm text-red-600">
             Bookings could not be loaded. Make sure this account has staff access.
           </p>
         )}
         {!isLoading && !error && bookings.length === 0 && (
-          <p className="mt-10 text-sm text-[#E8E6E1]/50">No bookings match this view yet.</p>
+          <div className="mt-8 rounded-xl border border-dashed border-slate-300 bg-white p-10 text-center text-sm text-slate-500">
+            No bookings match this view yet.
+          </div>
         )}
 
-        <div className="mt-8 space-y-4">
+        <div className="mt-6 space-y-4">
           {bookings.map((b) => (
-            <article key={b.id} className="border border-white/10 bg-white/[0.03] p-5">
-              <div className="flex flex-wrap items-start justify-between gap-3">
+            <article key={b.id} className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+              <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
                   {b.booking_reference && (
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-[#C7A867]">{b.booking_reference}</p>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+                      {b.booking_reference}
+                    </p>
                   )}
                   <h2 className="mt-1 text-base font-semibold">{b.customer_name}</h2>
-                  <p className="mt-1 text-sm text-[#E8E6E1]/60">
+                  <p className="mt-1 text-sm text-slate-600">
                     {b.service} · 60 min · {b.professional_preference}
                   </p>
-                  <p className="mt-1 text-sm text-[#E8E6E1]/60">
+                  <p className="mt-1 text-sm text-slate-600">
                     {b.booking_date} · {b.time_slot}
                   </p>
-                  <p className="mt-1 text-sm text-[#E8E6E1]/60">{b.location}</p>
-                  {b.email && <p className="mt-1 text-sm text-[#E8E6E1]/45">{b.email}</p>}
+                  <p className="mt-1 text-sm text-slate-500">{b.location}</p>
+                  {b.email && <p className="mt-1 text-sm text-slate-500">{b.email}</p>}
                   {b.customer_message && (
-                    <p className="mt-2 max-w-md text-sm italic text-[#E8E6E1]/55">“{b.customer_message}”</p>
+                    <p className="mt-2 max-w-md rounded-lg bg-slate-50 p-3 text-sm italic text-slate-600">
+                      “{b.customer_message}”
+                    </p>
                   )}
                 </div>
                 <div className="flex flex-col items-end gap-2 text-right">
-                  <span className="rounded-full border border-[#C7A867]/40 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-[#C7A867]">
+                  <span
+                    className={`rounded-full border px-3 py-1 text-xs font-medium capitalize ${
+                      STATUS_STYLES[b.status] ?? "border-slate-200 bg-slate-100 text-slate-600"
+                    }`}
+                  >
                     {b.status}
                   </span>
-                  <a href={`tel:${b.phone}`} className="text-sm text-[#E8E6E1]/80 underline-offset-4 hover:underline">
+                  <a href={`tel:${b.phone}`} className="text-sm font-medium text-slate-700 hover:underline">
                     {b.phone}
                   </a>
                   <a
                     href={`https://wa.me/${b.phone.replace(/[^0-9]/g, "")}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs uppercase tracking-[0.15em] text-[#C7A867] underline-offset-4 hover:underline"
+                    className="text-sm font-medium text-emerald-600 hover:underline"
                   >
                     WhatsApp
                   </a>
                 </div>
               </div>
 
-              <div className="mt-4 flex flex-wrap gap-2">
+              <div className="mt-4 flex flex-wrap gap-2 border-t border-slate-100 pt-4">
                 {STATUSES.map((s) => (
                   <button
                     key={s}
                     disabled={savingId === b.id || b.status === s}
                     onClick={() => patch(b.id, { status: s })}
-                    className={`rounded-full border px-3 py-1 text-[10px] uppercase tracking-[0.18em] transition disabled:opacity-40 ${
-                      b.status === s ? "border-[#C7A867] text-[#C7A867]" : "border-white/12 text-[#E8E6E1]/60 hover:text-[#E8E6E1]"
+                    className={`rounded-lg border px-3 py-1.5 text-sm font-medium capitalize transition disabled:opacity-40 ${
+                      b.status === s
+                        ? "border-slate-900 bg-slate-900 text-white"
+                        : "border-slate-200 bg-white text-slate-600 hover:bg-slate-50"
                     }`}
                   >
                     {s}
@@ -187,13 +229,13 @@ function AdminBookings() {
                   placeholder="Private note (e.g. therapist assigned)"
                   value={notes[b.id] ?? b.admin_note ?? ""}
                   onChange={(e) => setNotes({ ...notes, [b.id]: e.target.value })}
-                  className="min-h-[70px] border-white/10 bg-white/5 text-sm text-[#E8E6E1]"
+                  className="min-h-[70px] border-slate-300 bg-white text-sm text-slate-900"
                 />
                 <Button
                   size="sm"
                   disabled={savingId === b.id}
                   onClick={() => patch(b.id, { admin_note: notes[b.id] ?? b.admin_note ?? "" })}
-                  className="mt-2 bg-[#C7A867] text-[#0B0D0C] hover:bg-[#d8bb7c]"
+                  className="mt-2 bg-slate-900 text-white hover:bg-slate-800"
                 >
                   Save note
                 </Button>
@@ -201,7 +243,7 @@ function AdminBookings() {
             </article>
           ))}
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
   );
 }
