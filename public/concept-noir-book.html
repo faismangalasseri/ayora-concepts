@@ -296,40 +296,11 @@
     document.getElementById('confirm-when').textContent = payload.booking_date + ' at ' + payload.time_slot;
     document.getElementById('confirm-location').textContent = payload.location;
     document.getElementById('confirm-whatsapp').href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(message);
-    const rememberDetails = () => {
-      try {
-        localStorage.setItem(SAVED_KEY, JSON.stringify({
-          name: payload.customer_name,
-          phone: payload.phone,
-          email: payload.email,
-          emirate: clean(fields.emirate.value, 40),
-          area: clean(fields.area.value, 120),
-          address: clean(fields.address.value, 160),
-        }));
-      } catch {}
-    };
-    const showConfirmation = () => {
-      form.classList.add('hidden');
-      document.getElementById('confirmation').classList.remove('hidden');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
+    document.getElementById('confirm-track').href = '/concept/noir-track?ref=' + encodeURIComponent(reference);
+    document.getElementById('confirm-track').classList.remove('hidden');
 
-
-    // Remember details so the next booking starts pre-filled
-    try {
-      localStorage.setItem(SAVED_KEY, JSON.stringify({
-        name: payload.customer_name,
-        phone: payload.phone,
-        email: payload.email,
-        emirate: clean(fields.emirate.value, 40),
-        area: clean(fields.area.value, 120),
-        address: clean(fields.address.value, 160),
-      }));
-    } catch {}
-
-    form.classList.add('hidden');
-    document.getElementById('confirmation').classList.remove('hidden');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    rememberDetails();
+    showConfirmation();
   });
 
   updateSummary();
