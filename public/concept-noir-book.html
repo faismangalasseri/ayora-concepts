@@ -133,6 +133,19 @@
     if (match) fields.service.value = match.value;
   }
 
+  // Returning customer: refill contact and address details from their last booking
+  const SAVED_KEY = 'ayora-booking-details';
+  try {
+    const saved = JSON.parse(localStorage.getItem(SAVED_KEY) || '{}');
+    if (saved.name && !fields.name.value) fields.name.value = saved.name;
+    if (saved.phone && !fields.phone.value) fields.phone.value = saved.phone;
+    if (saved.email && fields.email && !fields.email.value) fields.email.value = saved.email;
+    if (saved.emirate && Array.from(fields.emirate.options).some((o) => o.value === saved.emirate)) fields.emirate.value = saved.emirate;
+    if (saved.area && !fields.area.value) fields.area.value = saved.area;
+    if (saved.address && !fields.address.value) fields.address.value = saved.address;
+  } catch {}
+
+
   function showError(text) { formError.textContent = text; formError.classList.remove('hidden'); }
   function hideError() { formError.classList.add('hidden'); }
 
@@ -248,6 +261,18 @@
     document.getElementById('confirm-when').textContent = payload.booking_date + ' at ' + payload.time_slot;
     document.getElementById('confirm-location').textContent = payload.location;
     document.getElementById('confirm-whatsapp').href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(message);
+
+    // Remember details so the next booking starts pre-filled
+    try {
+      localStorage.setItem(SAVED_KEY, JSON.stringify({
+        name: payload.customer_name,
+        phone: payload.phone,
+        email: payload.email,
+        emirate: clean(fields.emirate.value, 40),
+        area: clean(fields.area.value, 120),
+        address: clean(fields.address.value, 160),
+      }));
+    } catch {}
 
     form.classList.add('hidden');
     document.getElementById('confirmation').classList.remove('hidden');
