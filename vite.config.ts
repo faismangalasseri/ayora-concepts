@@ -26,6 +26,7 @@ export default defineConfig({
       { path: "/concept/editorial" },
       { path: "/concept/noir" },
       { path: "/concept/noir-book" },
+      { path: "/concept/noir-track" },
       { path: "/concept/kinetic" },
       { path: "/concept/botanical" },
       { path: "/concept/earth-noir" },

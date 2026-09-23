@@ -33,7 +33,10 @@
 <nav class="border-b border-white/5 bg-noir/75 backdrop-blur-xl">
   <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
     <a href="/concept/noir" target="_top" class="font-display text-2xl tracking-[0.25em] text-gold">AYORA</a>
-    <a href="/concept/noir" target="_top" class="text-[10px] uppercase tracking-[0.22em] text-mist/55 transition-colors hover:text-gold">← Back to website</a>
+    <div class="flex items-center gap-5">
+      <a href="/concept/noir-track" target="_top" class="text-[10px] uppercase tracking-[0.22em] text-mist/55 transition-colors hover:text-gold">Track booking</a>
+      <a href="/concept/noir" target="_top" class="text-[10px] uppercase tracking-[0.22em] text-mist/55 transition-colors hover:text-gold">← Back to website</a>
+    </div>
   </div>
 </nav>
 <main class="px-6 py-12 md:py-20">
@@ -48,6 +51,7 @@
       <section class="border border-white/10 bg-noir-soft/60 p-6 md:p-9" aria-labelledby="details-title">
         <h2 id="details-title" class="font-display text-2xl">Session details</h2>
         <p class="mt-3 text-xs text-mist/40">Fields marked <span class="text-gold">*</span> are required.</p>
+        <p id="welcome-back" class="mt-3 hidden text-xs leading-relaxed text-gold/90"></p>
         <div class="mt-8 grid gap-6 sm:grid-cols-2">
           <label class="sm:col-span-2"><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Service · 60 minutes <span class="text-gold">*</span></span><select id="service" required class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist"><option value="">Choose a service</option><option>Ayurvedic Relaxation Massage</option><option>Abhyanga-Inspired Massage</option><option>Head &amp; Shoulder Wellness Massage</option><option>Back &amp; Body Relaxation</option><option>Foot Wellness Massage</option><option>Stress &amp; Relaxation Massage</option><option>Kalari Marma Thirummal</option><option>Sports Injury Massage</option></select><span class="error mt-2 hidden text-xs text-gold" data-error="service">Please choose a service.</span></label>
           <fieldset class="sm:col-span-2"><legend class="mb-3 text-[10px] uppercase tracking-[0.2em] text-mist/55">Preferred wellness professional <span class="text-gold">*</span></legend><div class="grid gap-3 sm:grid-cols-3"><label class="cursor-pointer border border-white/10 p-4 text-sm has-[:checked]:border-gold/70 has-[:checked]:text-gold"><input class="mr-2 accent-gold" type="radio" name="professional" value="Female" required>Female</label><label class="cursor-pointer border border-white/10 p-4 text-sm has-[:checked]:border-gold/70 has-[:checked]:text-gold"><input class="mr-2 accent-gold" type="radio" name="professional" value="Male" required>Male</label><label class="cursor-pointer border border-white/10 p-4 text-sm has-[:checked]:border-gold/70 has-[:checked]:text-gold"><input class="mr-2 accent-gold" type="radio" name="professional" value="No Preference" required>No preference</label></div><p class="mt-3 text-xs leading-relaxed text-mist/40">Male and female professionals are scheduled separately, subject to availability and AYORA service policy.</p><span class="error mt-2 hidden text-xs text-gold" data-error="professional">Please select your preference.</span></fieldset>
@@ -96,6 +100,7 @@
       </dl>
       <div class="mt-8 flex flex-wrap gap-4">
         <a id="confirm-whatsapp" href="#" target="_blank" rel="noopener noreferrer" class="rounded-full bg-gold px-7 py-4 text-sm font-semibold text-noir transition-transform hover:scale-[1.02]">Continue on WhatsApp</a>
+        <a id="confirm-track" href="/concept/noir-track" target="_top" class="rounded-full border border-white/15 px-7 py-4 text-sm text-mist/75 transition-colors hover:border-gold/60 hover:text-gold">Track this booking</a>
         <a href="/concept/noir" target="_top" class="rounded-full border border-white/15 px-7 py-4 text-sm text-mist/75 transition-colors hover:border-gold/60 hover:text-gold">Back to website</a>
       </div>
     </section>
@@ -135,14 +140,20 @@
 
   // Returning customer: refill contact and address details from their last booking
   const SAVED_KEY = 'ayora-booking-details';
+  let welcomedBack = false;
   try {
     const saved = JSON.parse(localStorage.getItem(SAVED_KEY) || '{}');
-    if (saved.name && !fields.name.value) fields.name.value = saved.name;
+    if (saved.name && !fields.name.value) { fields.name.value = saved.name; welcomedBack = true; }
     if (saved.phone && !fields.phone.value) fields.phone.value = saved.phone;
     if (saved.email && fields.email && !fields.email.value) fields.email.value = saved.email;
     if (saved.emirate && Array.from(fields.emirate.options).some((o) => o.value === saved.emirate)) fields.emirate.value = saved.emirate;
     if (saved.area && !fields.area.value) fields.area.value = saved.area;
     if (saved.address && !fields.address.value) fields.address.value = saved.address;
+    if (welcomedBack) {
+      const note = document.getElementById('welcome-back');
+      note.textContent = 'Welcome back, ' + saved.name + ' — your details are filled in from your last visit. Just pick a service, date and time.';
+      note.classList.remove('hidden');
+    }
   } catch {}
 
 
@@ -217,6 +228,25 @@
       customer_message: clean(fields.message.value, 300),
     };
 
+    const rememberDetails = () => {
+      try {
+        localStorage.setItem(SAVED_KEY, JSON.stringify({
+          name: payload.customer_name,
+          phone: payload.phone,
+          email: payload.email,
+          emirate: clean(fields.emirate.value, 40),
+          area: clean(fields.area.value, 120),
+          address: clean(fields.address.value, 160),
+        }));
+      } catch {}
+    };
+    const showConfirmation = () => {
+      form.classList.add('hidden');
+      document.getElementById('confirmation').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending request…';
     let result;
@@ -231,9 +261,33 @@
         return;
       }
     } catch {
-      showError('Could not reach AYORA right now. Please try again or message us on WhatsApp.');
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Request booking';
+      // Save service unavailable (e.g. static hosting copy) — continue with WhatsApp only.
+      const reference = '';
+      const message = [
+        'Hello AYORA, I would like to book a wellness session.',
+        '',
+        'Service: ' + payload.service + ' (60 min)',
+        'Preferred professional: ' + payload.professional_preference,
+        'Date: ' + payload.booking_date,
+        'Time: ' + payload.time_slot,
+        'Location: ' + payload.location,
+        'Name: ' + payload.customer_name,
+        'Phone: ' + payload.phone,
+        payload.email ? 'Email: ' + payload.email : '',
+        payload.customer_message ? 'Note: ' + payload.customer_message : '',
+        '',
+        'Please confirm availability.',
+      ].filter((line) => line !== '').join('\n');
+
+      document.getElementById('confirm-name').textContent = payload.customer_name;
+      document.getElementById('confirm-ref').textContent = '—';
+      document.getElementById('confirm-service').textContent = payload.service;
+      document.getElementById('confirm-when').textContent = payload.booking_date + ' at ' + payload.time_slot;
+      document.getElementById('confirm-location').textContent = payload.location;
+      document.getElementById('confirm-whatsapp').href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(message);
+      document.getElementById('confirm-track').classList.add('hidden');
+      rememberDetails();
+      showConfirmation();
       return;
     }
 
@@ -261,22 +315,11 @@
     document.getElementById('confirm-when').textContent = payload.booking_date + ' at ' + payload.time_slot;
     document.getElementById('confirm-location').textContent = payload.location;
     document.getElementById('confirm-whatsapp').href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(message);
+    document.getElementById('confirm-track').href = '/concept/noir-track?ref=' + encodeURIComponent(reference);
+    document.getElementById('confirm-track').classList.remove('hidden');
 
-    // Remember details so the next booking starts pre-filled
-    try {
-      localStorage.setItem(SAVED_KEY, JSON.stringify({
-        name: payload.customer_name,
-        phone: payload.phone,
-        email: payload.email,
-        emirate: clean(fields.emirate.value, 40),
-        area: clean(fields.area.value, 120),
-        address: clean(fields.address.value, 160),
-      }));
-    } catch {}
-
-    form.classList.add('hidden');
-    document.getElementById('confirmation').classList.remove('hidden');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    rememberDetails();
+    showConfirmation();
   });
 
   updateSummary();
