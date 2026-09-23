@@ -242,9 +242,33 @@
         return;
       }
     } catch {
-      showError('Could not reach AYORA right now. Please try again or message us on WhatsApp.');
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Request booking';
+      // Save service unavailable (e.g. static hosting copy) — continue with WhatsApp only.
+      const reference = '';
+      const message = [
+        'Hello AYORA, I would like to book a wellness session.',
+        '',
+        'Service: ' + payload.service + ' (60 min)',
+        'Preferred professional: ' + payload.professional_preference,
+        'Date: ' + payload.booking_date,
+        'Time: ' + payload.time_slot,
+        'Location: ' + payload.location,
+        'Name: ' + payload.customer_name,
+        'Phone: ' + payload.phone,
+        payload.email ? 'Email: ' + payload.email : '',
+        payload.customer_message ? 'Note: ' + payload.customer_message : '',
+        '',
+        'Please confirm availability.',
+      ].filter((line) => line !== '').join('\n');
+
+      document.getElementById('confirm-name').textContent = payload.customer_name;
+      document.getElementById('confirm-ref').textContent = '—';
+      document.getElementById('confirm-service').textContent = payload.service;
+      document.getElementById('confirm-when').textContent = payload.booking_date + ' at ' + payload.time_slot;
+      document.getElementById('confirm-location').textContent = payload.location;
+      document.getElementById('confirm-whatsapp').href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(message);
+      document.getElementById('confirm-track').classList.add('hidden');
+      saveDetails();
+      showConfirmation();
       return;
     }
 
