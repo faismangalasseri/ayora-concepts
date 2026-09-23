@@ -14,6 +14,10 @@ export type Booking = {
   phone: string;
   status: string;
   admin_note: string | null;
+  booking_reference: string | null;
+  email: string | null;
+  customer_message: string | null;
+  booking_source: string | null;
 };
 
 export const listBookings = createServerFn({ method: "GET" })
