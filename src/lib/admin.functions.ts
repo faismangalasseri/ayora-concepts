@@ -14,6 +14,10 @@ export type Booking = {
   phone: string;
   status: string;
   admin_note: string | null;
+  booking_reference: string | null;
+  email: string | null;
+  customer_message: string | null;
+  booking_source: string | null;
 };
 
 export const listBookings = createServerFn({ method: "GET" })
@@ -22,7 +26,7 @@ export const listBookings = createServerFn({ method: "GET" })
     const { data, error } = await context.supabase
       .from("bookings")
       .select(
-        "id, created_at, service, professional_preference, booking_date, time_slot, location, customer_name, phone, status, admin_note",
+        "id, created_at, service, professional_preference, booking_date, time_slot, location, customer_name, phone, status, admin_note, booking_reference, email, customer_message, booking_source",
       )
       .order("created_at", { ascending: false })
       .limit(500);

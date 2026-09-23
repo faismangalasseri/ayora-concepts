@@ -18,8 +18,13 @@ export type Database = {
         Row: {
           admin_note: string | null
           booking_date: string
+          booking_reference: string
+          booking_source: string
+          confirmed_at: string | null
           created_at: string
+          customer_message: string | null
           customer_name: string
+          email: string | null
           id: string
           location: string
           phone: string
@@ -32,8 +37,13 @@ export type Database = {
         Insert: {
           admin_note?: string | null
           booking_date: string
+          booking_reference?: string
+          booking_source?: string
+          confirmed_at?: string | null
           created_at?: string
+          customer_message?: string | null
           customer_name: string
+          email?: string | null
           id?: string
           location: string
           phone: string
@@ -46,8 +56,13 @@ export type Database = {
         Update: {
           admin_note?: string | null
           booking_date?: string
+          booking_reference?: string
+          booking_source?: string
+          confirmed_at?: string | null
           created_at?: string
+          customer_message?: string | null
           customer_name?: string
+          email?: string | null
           id?: string
           location?: string
           phone?: string

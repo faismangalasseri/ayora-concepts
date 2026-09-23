@@ -1,6 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 
+type BookSearch = { service?: string | undefined };
+
 export const Route = createFileRoute("/concept/noir-book")({
+  validateSearch: (search: Record<string, unknown>): BookSearch => ({
+    service: typeof search['service'] === "string" ? search['service'].slice(0, 120) : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Book an At-Home Wellness Session — AYORA" },
@@ -16,5 +21,9 @@ export const Route = createFileRoute("/concept/noir-book")({
 });
 
 function NoirBooking() {
-  return <iframe src="/concept-noir-book.html" title="Book an AYORA home wellness session" className="fixed inset-0 h-full w-full border-0" />;
+  const { service } = Route.useSearch();
+  const src = service
+    ? `/concept-noir-book.html?service=${encodeURIComponent(service)}`
+    : "/concept-noir-book.html";
+  return <iframe src={src} title="Book an AYORA home wellness session" className="fixed inset-0 h-full w-full border-0" />;
 }
