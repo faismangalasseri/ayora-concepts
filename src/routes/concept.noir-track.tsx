@@ -1,6 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 
+type TrackSearch = { ref?: string | undefined };
+
 export const Route = createFileRoute("/concept/noir-track")({
+  validateSearch: (search: Record<string, unknown>): TrackSearch => ({
+    ref: typeof search['ref'] === "string" ? search['ref'].slice(0, 25) : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Track Your Booking — AYORA" },
@@ -19,5 +24,9 @@ export const Route = createFileRoute("/concept/noir-track")({
 });
 
 function NoirTrack() {
-  return <iframe src="/concept-noir-track.html" title="Track your AYORA booking" className="fixed inset-0 h-full w-full border-0" />;
+  const { ref } = Route.useSearch();
+  const src = ref
+    ? `/concept-noir-track.html?ref=${encodeURIComponent(ref)}`
+    : "/concept-noir-track.html";
+  return <iframe src={src} title="Track your AYORA booking" className="fixed inset-0 h-full w-full border-0" />;
 }
