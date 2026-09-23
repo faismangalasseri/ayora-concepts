@@ -228,6 +228,25 @@
       customer_message: clean(fields.message.value, 300),
     };
 
+    const rememberDetails = () => {
+      try {
+        localStorage.setItem(SAVED_KEY, JSON.stringify({
+          name: payload.customer_name,
+          phone: payload.phone,
+          email: payload.email,
+          emirate: clean(fields.emirate.value, 40),
+          area: clean(fields.area.value, 120),
+          address: clean(fields.address.value, 160),
+        }));
+      } catch {}
+    };
+    const showConfirmation = () => {
+      form.classList.add('hidden');
+      document.getElementById('confirmation').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending request…';
     let result;
