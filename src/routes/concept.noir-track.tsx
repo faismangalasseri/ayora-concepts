@@ -13,7 +13,7 @@ export const Route = createFileRoute("/concept/noir-track")({
     ],
   }),
   component: () => (
-    <div
+    <iframe
       class="h-screen w-full border-0"
       src="/concept-noir-track.html"
       title="Track your AYORA booking"
