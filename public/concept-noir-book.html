@@ -267,7 +267,7 @@
       document.getElementById('confirm-location').textContent = payload.location;
       document.getElementById('confirm-whatsapp').href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(message);
       document.getElementById('confirm-track').classList.add('hidden');
-      saveDetails();
+      rememberDetails();
       showConfirmation();
       return;
     }
