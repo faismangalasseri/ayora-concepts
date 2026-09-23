@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-type BookSearch = { service?: string };
+type BookSearch = { service?: string | undefined };
 
 export const Route = createFileRoute("/concept/noir-book")({
   validateSearch: (search: Record<string, unknown>): BookSearch => ({
