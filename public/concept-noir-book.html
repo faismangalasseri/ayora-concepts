@@ -47,10 +47,11 @@
     <form id="booking-form" class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_340px]" novalidate>
       <section class="border border-white/10 bg-noir-soft/60 p-6 md:p-9" aria-labelledby="details-title">
         <h2 id="details-title" class="font-display text-2xl">Session details</h2>
+        <p class="mt-3 text-xs text-mist/40">Fields marked <span class="text-gold">*</span> are required.</p>
         <div class="mt-8 grid gap-6 sm:grid-cols-2">
-          <label class="sm:col-span-2"><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Service · 60 minutes</span><select id="service" required class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist"><option value="">Choose a service</option><option>Ayurvedic Relaxation Massage</option><option>Abhyanga-Inspired Massage</option><option>Head &amp; Shoulder Wellness Massage</option><option>Back &amp; Body Relaxation</option><option>Foot Wellness Massage</option><option>Stress &amp; Relaxation Massage</option><option>Kalari Marma Thirummal</option><option>Sports Injury Massage</option></select><span class="error mt-2 hidden text-xs text-gold" data-error="service">Please choose a service.</span></label>
-          <fieldset class="sm:col-span-2"><legend class="mb-3 text-[10px] uppercase tracking-[0.2em] text-mist/55">Preferred wellness professional</legend><div class="grid gap-3 sm:grid-cols-3"><label class="cursor-pointer border border-white/10 p-4 text-sm has-[:checked]:border-gold/70 has-[:checked]:text-gold"><input class="mr-2 accent-gold" type="radio" name="professional" value="Female" required>Female</label><label class="cursor-pointer border border-white/10 p-4 text-sm has-[:checked]:border-gold/70 has-[:checked]:text-gold"><input class="mr-2 accent-gold" type="radio" name="professional" value="Male" required>Male</label><label class="cursor-pointer border border-white/10 p-4 text-sm has-[:checked]:border-gold/70 has-[:checked]:text-gold"><input class="mr-2 accent-gold" type="radio" name="professional" value="No Preference" required>No preference</label></div><p class="mt-3 text-xs leading-relaxed text-mist/40">Male and female professionals are scheduled separately, subject to availability and AYORA service policy.</p><span class="error mt-2 hidden text-xs text-gold" data-error="professional">Please select your preference.</span></fieldset>
-          <label><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Preferred date</span><input id="date" type="date" required class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist"><span class="mt-2 block text-xs leading-relaxed text-mist/40">Today or later.</span><span class="error mt-2 hidden text-xs text-gold" data-error="date">Please choose today or a later date.</span></label>
+          <label class="sm:col-span-2"><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Service · 60 minutes <span class="text-gold">*</span></span><select id="service" required class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist"><option value="">Choose a service</option><option>Ayurvedic Relaxation Massage</option><option>Abhyanga-Inspired Massage</option><option>Head &amp; Shoulder Wellness Massage</option><option>Back &amp; Body Relaxation</option><option>Foot Wellness Massage</option><option>Stress &amp; Relaxation Massage</option><option>Kalari Marma Thirummal</option><option>Sports Injury Massage</option></select><span class="error mt-2 hidden text-xs text-gold" data-error="service">Please choose a service.</span></label>
+          <fieldset class="sm:col-span-2"><legend class="mb-3 text-[10px] uppercase tracking-[0.2em] text-mist/55">Preferred wellness professional <span class="text-gold">*</span></legend><div class="grid gap-3 sm:grid-cols-3"><label class="cursor-pointer border border-white/10 p-4 text-sm has-[:checked]:border-gold/70 has-[:checked]:text-gold"><input class="mr-2 accent-gold" type="radio" name="professional" value="Female" required>Female</label><label class="cursor-pointer border border-white/10 p-4 text-sm has-[:checked]:border-gold/70 has-[:checked]:text-gold"><input class="mr-2 accent-gold" type="radio" name="professional" value="Male" required>Male</label><label class="cursor-pointer border border-white/10 p-4 text-sm has-[:checked]:border-gold/70 has-[:checked]:text-gold"><input class="mr-2 accent-gold" type="radio" name="professional" value="No Preference" required>No preference</label></div><p class="mt-3 text-xs leading-relaxed text-mist/40">Male and female professionals are scheduled separately, subject to availability and AYORA service policy.</p><span class="error mt-2 hidden text-xs text-gold" data-error="professional">Please select your preference.</span></fieldset>
+          <label><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Preferred date <span class="text-gold">*</span></span><input id="date" type="date" required class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist"><span class="mt-2 block text-xs leading-relaxed text-mist/40">Today or later.</span><span class="error mt-2 hidden text-xs text-gold" data-error="date">Please choose today or a later date.</span></label>
           <fieldset><legend class="mb-3 text-[10px] uppercase tracking-[0.2em] text-mist/55">Preferred time · 60 min <span class="text-gold">*</span></legend><div id="slots" class="flex flex-col gap-2">
             <label class="slot flex cursor-pointer items-center justify-between border border-white/10 px-4 py-3.5 text-sm has-[:checked]:border-gold/70 has-[:checked]:text-gold"><span class="flex items-center"><input class="mr-3 accent-gold" type="radio" name="time" value="9:00 AM – 10:00 AM" required><span>9:00 – 10:00 AM</span></span><span class="text-[10px] uppercase tracking-[0.2em] text-mist/35">Morning</span></label>
             <label class="slot flex cursor-pointer items-center justify-between border border-white/10 px-4 py-3.5 text-sm has-[:checked]:border-gold/70 has-[:checked]:text-gold"><span class="flex items-center"><input class="mr-3 accent-gold" type="radio" name="time" value="12:00 PM – 1:00 PM" required><span>12:00 – 1:00 PM</span></span><span class="text-[10px] uppercase tracking-[0.2em] text-mist/35">Midday</span></label>
@@ -60,8 +61,8 @@
           <label><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Emirate <span class="text-gold">*</span></span><select id="emirate" required class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist"><option value="">Choose your emirate</option><option>Dubai</option><option>Abu Dhabi</option><option>Sharjah</option><option>Ajman</option><option>Umm Al Quwain</option><option>Ras Al Khaimah</option><option>Fujairah</option></select><span class="error mt-2 hidden text-xs text-gold" data-error="emirate">Please choose your emirate.</span></label>
           <label><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Area <span class="text-gold">*</span></span><input id="area" type="text" required maxlength="120" placeholder="e.g. Dubai Marina" class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist placeholder:text-mist/25"><span class="error mt-2 hidden text-xs text-gold" data-error="area">Please enter your area.</span></label>
           <label class="sm:col-span-2"><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Full address · building or villa <span class="text-gold">*</span></span><input id="address" type="text" required maxlength="160" autocomplete="address-line1" placeholder="Building / villa, street, landmark" class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist placeholder:text-mist/25"><span class="error mt-2 hidden text-xs text-gold" data-error="address">Please enter your building or villa address.</span></label>
-          <label><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Your name</span><input id="name" type="text" required minlength="2" maxlength="80" autocomplete="name" class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist"><span class="error mt-2 hidden text-xs text-gold" data-error="name">Please enter your name.</span></label>
-          <label><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Phone number</span><input id="phone" type="tel" required maxlength="20" pattern="[0-9 +\(\)\-]{7,20}" autocomplete="tel" placeholder="+971" class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist placeholder:text-mist/25"><span class="error mt-2 hidden text-xs text-gold" data-error="phone">Enter a valid phone number.</span></label>
+          <label><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Your name <span class="text-gold">*</span></span><input id="name" type="text" required minlength="2" maxlength="80" autocomplete="name" class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist"><span class="error mt-2 hidden text-xs text-gold" data-error="name">Please enter your name.</span></label>
+          <label><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Phone number <span class="text-gold">*</span></span><input id="phone" type="tel" required maxlength="20" pattern="[0-9 +\(\)\-]{7,20}" autocomplete="tel" placeholder="+971" class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist placeholder:text-mist/25"><span class="error mt-2 hidden text-xs text-gold" data-error="phone">Enter a valid phone number.</span></label>
           <label><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Email <span class="text-mist/30">(optional)</span></span><input id="email" type="email" maxlength="160" autocomplete="email" class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist"></label>
           <label><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Special request <span class="text-mist/30">(optional)</span></span><input id="message" type="text" maxlength="300" placeholder="Anything we should know" class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist placeholder:text-mist/25"></label>
         </div>
@@ -109,7 +110,8 @@
   const fields = {
     service: document.getElementById('service'),
     date: document.getElementById('date'),
-    location: document.getElementById('location'),
+    emirate: document.getElementById('emirate'),
+    area: document.getElementById('area'),
     address: document.getElementById('address'),
     name: document.getElementById('name'),
     phone: document.getElementById('phone'),
@@ -157,12 +159,19 @@
     updateSummary();
   }
 
+  const placeText = () => {
+    const area = clean(fields.area.value, 120);
+    const emirate = clean(fields.emirate.value, 40);
+    const head = [area, emirate].filter(Boolean).join(', ');
+    return [head, clean(fields.address.value, 160)].filter(Boolean).join(' · ');
+  };
+
   function updateSummary() {
     document.getElementById('summary-service').textContent = fields.service.value || 'Not selected';
     document.getElementById('summary-professional').textContent = radio('professional') || 'Not selected';
     const when = fields.date.value && radio('time') ? fields.date.value + ' at ' + radio('time') : fields.date.value || radio('time') || 'Not selected';
     document.getElementById('summary-when').textContent = when;
-    const place = [clean(fields.location.value, 120), clean(fields.address.value, 160)].filter(Boolean).join(' · ');
+    const place = placeText();
     document.getElementById('summary-location').textContent = place || 'Not entered';
   }
 
@@ -175,7 +184,7 @@
     hideError();
 
     let valid = true;
-    ['service', 'date', 'location', 'name', 'phone'].forEach((key) => {
+    ['service', 'date', 'emirate', 'area', 'address', 'name', 'phone'].forEach((key) => {
       if (!fields[key].checkValidity()) { document.querySelector('[data-error="' + key + '"]').classList.remove('hidden'); valid = false; }
     });
     if (fields.date.value && fields.date.value < localToday()) { document.querySelector('[data-error="date"]').classList.remove('hidden'); valid = false; }
@@ -188,7 +197,7 @@
       professional_preference: radio('professional'),
       booking_date: fields.date.value,
       time_slot: radio('time'),
-      location: [clean(fields.location.value, 120), clean(fields.address.value, 160)].filter(Boolean).join(' · '),
+      location: placeText(),
       customer_name: clean(fields.name.value, 80),
       phone: clean(fields.phone.value, 25),
       email: clean(fields.email.value, 160),
