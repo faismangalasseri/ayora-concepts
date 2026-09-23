@@ -272,6 +272,7 @@
     document.getElementById('confirm-when').textContent = payload.booking_date + ' at ' + payload.time_slot;
     document.getElementById('confirm-location').textContent = payload.location;
     document.getElementById('confirm-whatsapp').href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(message);
+    document.getElementById('confirm-track').href = '/concept/noir-track?ref=' + encodeURIComponent(reference);
 
     // Remember details so the next booking starts pre-filled
     try {
