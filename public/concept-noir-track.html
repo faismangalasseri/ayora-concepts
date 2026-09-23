@@ -119,9 +119,19 @@
     } catch {
       showError('Could not reach AYORA right now. Please try again in a moment.');
     } finally {
-      btn.disabled = false; btn.textContent = 'Find my booking';
+    btn.disabled = false; btn.textContent = 'Find my booking';
     }
   });
+
+  // Auto-look-up when arriving with ?ref= (e.g. from the confirmation screen)
+  window.addEventListener('DOMContentLoaded', () => {
+    const ref = new URLSearchParams(window.location.search).get('ref');
+    if (ref) {
+      document.getElementById('query').value = ref;
+      form.dispatchEvent(new Event('submit'));
+    }
+  });
+
 </script>
 </body>
 </html>
