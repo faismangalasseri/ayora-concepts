@@ -23,6 +23,7 @@ import { Route as ConceptNoirBookRouteImport } from './routes/concept.noir-book'
 import { Route as ConceptNoirTrackRouteImport } from './routes/concept.noir-track'
 import { Route as ConceptSerifRouteImport } from './routes/concept/serif'
 import { Route as ApiPublicBookingsRouteImport } from './routes/api/public/bookings'
+import { Route as ApiPublicBookingsCustomerRouteImport } from './routes/api/public/bookings.customer'
 import { Route as ApiPublicBookingsTrackRouteImport } from './routes/api/public/bookings.track'
 
 const IndexRoute = IndexRouteImport.update({
@@ -94,6 +95,12 @@ const ApiPublicBookingsRoute = ApiPublicBookingsRouteImport.update({
   path: '/api/public/bookings',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicBookingsCustomerRoute =
+  ApiPublicBookingsCustomerRouteImport.update({
+    id: '/customer',
+    path: '/customer',
+    getParentRoute: () => ApiPublicBookingsRoute,
+  } as any)
 const ApiPublicBookingsTrackRoute = ApiPublicBookingsTrackRouteImport.update({
   id: '/track',
   path: '/track',
@@ -114,6 +121,7 @@ export interface FileRoutesByFullPath {
   '/concept/noir-track': typeof ConceptNoirTrackRoute
   '/concept/serif': typeof ConceptSerifRoute
   '/api/public/bookings': typeof ApiPublicBookingsRouteWithChildren
+  '/api/public/bookings/customer': typeof ApiPublicBookingsCustomerRoute
   '/api/public/bookings/track': typeof ApiPublicBookingsTrackRoute
 }
 export interface FileRoutesByTo {
@@ -130,6 +138,7 @@ export interface FileRoutesByTo {
   '/concept/noir-track': typeof ConceptNoirTrackRoute
   '/concept/serif': typeof ConceptSerifRoute
   '/api/public/bookings': typeof ApiPublicBookingsRouteWithChildren
+  '/api/public/bookings/customer': typeof ApiPublicBookingsCustomerRoute
   '/api/public/bookings/track': typeof ApiPublicBookingsTrackRoute
 }
 export interface FileRoutesById {
@@ -148,6 +157,7 @@ export interface FileRoutesById {
   '/concept/noir-track': typeof ConceptNoirTrackRoute
   '/concept/serif': typeof ConceptSerifRoute
   '/api/public/bookings': typeof ApiPublicBookingsRouteWithChildren
+  '/api/public/bookings/customer': typeof ApiPublicBookingsCustomerRoute
   '/api/public/bookings/track': typeof ApiPublicBookingsTrackRoute
 }
 export interface FileRouteTypes {
@@ -166,6 +176,7 @@ export interface FileRouteTypes {
     | '/concept/noir-track'
     | '/concept/serif'
     | '/api/public/bookings'
+    | '/api/public/bookings/customer'
     | '/api/public/bookings/track'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -182,6 +193,7 @@ export interface FileRouteTypes {
     | '/concept/noir-track'
     | '/concept/serif'
     | '/api/public/bookings'
+    | '/api/public/bookings/customer'
     | '/api/public/bookings/track'
   id:
     | '__root__'
@@ -199,6 +211,7 @@ export interface FileRouteTypes {
     | '/concept/noir-track'
     | '/concept/serif'
     | '/api/public/bookings'
+    | '/api/public/bookings/customer'
     | '/api/public/bookings/track'
   fileRoutesById: FileRoutesById
 }
@@ -318,6 +331,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicBookingsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/bookings/customer': {
+      id: '/api/public/bookings/customer'
+      path: '/customer'
+      fullPath: '/api/public/bookings/customer'
+      preLoaderRoute: typeof ApiPublicBookingsCustomerRouteImport
+      parentRoute: typeof ApiPublicBookingsRoute
+    }
     '/api/public/bookings/track': {
       id: '/api/public/bookings/track'
       path: '/track'
@@ -340,10 +360,12 @@ const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
 interface ApiPublicBookingsRouteChildren {
+  ApiPublicBookingsCustomerRoute: typeof ApiPublicBookingsCustomerRoute
   ApiPublicBookingsTrackRoute: typeof ApiPublicBookingsTrackRoute
 }
 
 const ApiPublicBookingsRouteChildren: ApiPublicBookingsRouteChildren = {
+  ApiPublicBookingsCustomerRoute: ApiPublicBookingsCustomerRoute,
   ApiPublicBookingsTrackRoute: ApiPublicBookingsTrackRoute,
 }
 

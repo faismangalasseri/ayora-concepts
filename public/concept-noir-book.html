@@ -66,7 +66,7 @@
           <label><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Area <span class="text-gold">*</span></span><input id="area" type="text" required maxlength="120" placeholder="e.g. Dubai Marina" class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist placeholder:text-mist/25"><span class="error mt-2 hidden text-xs text-gold" data-error="area">Please enter your area.</span></label>
           <label class="sm:col-span-2"><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Full address · building or villa <span class="text-gold">*</span></span><input id="address" type="text" required maxlength="160" autocomplete="address-line1" placeholder="Building / villa, street, landmark" class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist placeholder:text-mist/25"><span class="error mt-2 hidden text-xs text-gold" data-error="address">Please enter your building or villa address.</span></label>
           <label><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Your name <span class="text-gold">*</span></span><input id="name" type="text" required minlength="2" maxlength="80" autocomplete="name" class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist"><span class="error mt-2 hidden text-xs text-gold" data-error="name">Please enter your name.</span></label>
-          <label><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Phone number <span class="text-gold">*</span></span><input id="phone" type="tel" required maxlength="20" pattern="[0-9 +\(\)\-]{7,20}" autocomplete="tel" placeholder="+971" class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist placeholder:text-mist/25"><span class="error mt-2 hidden text-xs text-gold" data-error="phone">Enter a valid phone number.</span></label>
+          <label><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Phone number <span class="text-gold">*</span></span><input id="phone" type="tel" required maxlength="20" pattern="[0-9 +\(\)\-]{7,20}" autocomplete="tel" placeholder="+971" class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist placeholder:text-mist/25"><span class="mt-2 block text-xs leading-relaxed text-mist/40">Booked with us before? Enter the same number and your details fill in automatically.</span><span class="error mt-2 hidden text-xs text-gold" data-error="phone">Enter a valid phone number.</span></label>
           <label><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Email <span class="text-mist/30">(optional)</span></span><input id="email" type="email" maxlength="160" autocomplete="email" class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist"></label>
           <label><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Special request <span class="text-mist/30">(optional)</span></span><input id="message" type="text" maxlength="300" placeholder="Anything we should know" class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist placeholder:text-mist/25"></label>
         </div>
@@ -156,6 +156,36 @@
     }
   } catch {}
 
+  // Returning customer on a new device: typing the phone number they booked
+  // with fills in their name, email and address automatically.
+  const welcomeNote = document.getElementById('welcome-back');
+  let lookedUp = '';
+  async function lookupByPhone() {
+    const digits = (fields.phone.value || '').replace(/\D/g, '');
+    if (digits.length < 9 || digits === lookedUp) return;
+    lookedUp = digits;
+    try {
+      const res = await fetch('/api/public/bookings/customer?phone=' + encodeURIComponent(digits));
+      const data = await res.json();
+      if (!data || !data.found) return;
+      if (data.name && !fields.name.value) fields.name.value = data.name;
+      if (data.email && fields.email && !fields.email.value) fields.email.value = data.email;
+      if (data.emirate && !fields.emirate.value && Array.from(fields.emirate.options).some((o) => o.value === data.emirate)) fields.emirate.value = data.emirate;
+      if (data.area && !fields.area.value) fields.area.value = data.area;
+      if (data.address && !fields.address.value) fields.address.value = data.address;
+      if (welcomeNote) {
+        welcomeNote.textContent = 'Welcome back' + (data.name ? ', ' + data.name : '') + ' — we found your details from your last booking. Just pick a service, date and time.';
+        welcomeNote.classList.remove('hidden');
+      }
+      updateSummary();
+    } catch {}
+  }
+  fields.phone.addEventListener('change', lookupByPhone);
+  fields.phone.addEventListener('blur', lookupByPhone);
+  fields.phone.addEventListener('input', () => {
+    const digits = (fields.phone.value || '').replace(/\D/g, '');
+    if (digits.length >= 9) lookupByPhone();
+  });
 
   function showError(text) { formError.textContent = text; formError.classList.remove('hidden'); }
   function hideError() { formError.classList.add('hidden'); }
