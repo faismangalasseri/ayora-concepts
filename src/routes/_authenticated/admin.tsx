@@ -133,14 +133,21 @@ function AdminBookings() {
             <article key={b.id} className="border border-white/10 bg-white/[0.03] p-5">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
-                  <h2 className="text-base font-semibold">{b.customer_name}</h2>
+                  {b.booking_reference && (
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-[#C7A867]">{b.booking_reference}</p>
+                  )}
+                  <h2 className="mt-1 text-base font-semibold">{b.customer_name}</h2>
                   <p className="mt-1 text-sm text-[#E8E6E1]/60">
-                    {b.service} · {b.professional_preference} professional
+                    {b.service} · 60 min · {b.professional_preference}
                   </p>
                   <p className="mt-1 text-sm text-[#E8E6E1]/60">
                     {b.booking_date} · {b.time_slot}
                   </p>
                   <p className="mt-1 text-sm text-[#E8E6E1]/60">{b.location}</p>
+                  {b.email && <p className="mt-1 text-sm text-[#E8E6E1]/45">{b.email}</p>}
+                  {b.customer_message && (
+                    <p className="mt-2 max-w-md text-sm italic text-[#E8E6E1]/55">“{b.customer_message}”</p>
+                  )}
                 </div>
                 <div className="flex flex-col items-end gap-2 text-right">
                   <span className="rounded-full border border-[#C7A867]/40 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-[#C7A867]">
