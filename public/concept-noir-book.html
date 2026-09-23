@@ -156,6 +156,36 @@
     }
   } catch {}
 
+  // Returning customer on a new device: typing the phone number they booked
+  // with fills in their name, email and address automatically.
+  const welcomeNote = document.getElementById('welcome-back');
+  let lookedUp = '';
+  async function lookupByPhone() {
+    const digits = (fields.phone.value || '').replace(/\D/g, '');
+    if (digits.length < 9 || digits === lookedUp) return;
+    lookedUp = digits;
+    try {
+      const res = await fetch('/api/public/bookings/customer?phone=' + encodeURIComponent(digits));
+      const data = await res.json();
+      if (!data || !data.found) return;
+      if (data.name && !fields.name.value) fields.name.value = data.name;
+      if (data.email && fields.email && !fields.email.value) fields.email.value = data.email;
+      if (data.emirate && !fields.emirate.value && Array.from(fields.emirate.options).some((o) => o.value === data.emirate)) fields.emirate.value = data.emirate;
+      if (data.area && !fields.area.value) fields.area.value = data.area;
+      if (data.address && !fields.address.value) fields.address.value = data.address;
+      if (welcomeNote) {
+        welcomeNote.textContent = 'Welcome back' + (data.name ? ', ' + data.name : '') + ' — we found your details from your last booking. Just pick a service, date and time.';
+        welcomeNote.classList.remove('hidden');
+      }
+      updateSummary();
+    } catch {}
+  }
+  fields.phone.addEventListener('change', lookupByPhone);
+  fields.phone.addEventListener('blur', lookupByPhone);
+  fields.phone.addEventListener('input', () => {
+    const digits = (fields.phone.value || '').replace(/\D/g, '');
+    if (digits.length >= 9) lookupByPhone();
+  });
 
   function showError(text) { formError.textContent = text; formError.classList.remove('hidden'); }
   function hideError() { formError.classList.add('hidden'); }
