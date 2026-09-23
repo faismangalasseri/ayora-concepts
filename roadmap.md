@@ -12,3 +12,6 @@
 - [x] Expand the service catalogue and add separate male/female availability
 - [x] Add and verify the simple WhatsApp booking journey
 - [x] Upgrade Midnight Noir services with professional imagery and concise benefit-led copy
+- [x] Add customer booking-tracking page (reference or phone lookup) and verify end to end
+- [x] Verify repeat-customer prefill with visible welcome-back note
+- [x] Rebuild Netlify drag-and-drop package with booking flow, tracking and prefill
