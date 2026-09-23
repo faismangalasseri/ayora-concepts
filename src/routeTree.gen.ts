@@ -20,8 +20,10 @@ import { Route as ConceptEditorialRouteImport } from './routes/concept/editorial
 import { Route as ConceptKineticRouteImport } from './routes/concept/kinetic'
 import { Route as ConceptNoirRouteImport } from './routes/concept/noir'
 import { Route as ConceptNoirBookRouteImport } from './routes/concept.noir-book'
+import { Route as ConceptNoirTrackRouteImport } from './routes/concept.noir-track'
 import { Route as ConceptSerifRouteImport } from './routes/concept/serif'
 import { Route as ApiPublicBookingsRouteImport } from './routes/api/public/bookings'
+import { Route as ApiPublicBookingsTrackRouteImport } from './routes/api/public/bookings.track'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -77,6 +79,11 @@ const ConceptNoirBookRoute = ConceptNoirBookRouteImport.update({
   path: '/concept/noir-book',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConceptNoirTrackRoute = ConceptNoirTrackRouteImport.update({
+  id: '/concept/noir-track',
+  path: '/concept/noir-track',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ConceptSerifRoute = ConceptSerifRouteImport.update({
   id: '/concept/serif',
   path: '/concept/serif',
@@ -86,6 +93,11 @@ const ApiPublicBookingsRoute = ApiPublicBookingsRouteImport.update({
   id: '/api/public/bookings',
   path: '/api/public/bookings',
   getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicBookingsTrackRoute = ApiPublicBookingsTrackRouteImport.update({
+  id: '/track',
+  path: '/track',
+  getParentRoute: () => ApiPublicBookingsRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -99,8 +111,10 @@ export interface FileRoutesByFullPath {
   '/concept/kinetic': typeof ConceptKineticRoute
   '/concept/noir': typeof ConceptNoirRoute
   '/concept/noir-book': typeof ConceptNoirBookRoute
+  '/concept/noir-track': typeof ConceptNoirTrackRoute
   '/concept/serif': typeof ConceptSerifRoute
-  '/api/public/bookings': typeof ApiPublicBookingsRoute
+  '/api/public/bookings': typeof ApiPublicBookingsRouteWithChildren
+  '/api/public/bookings/track': typeof ApiPublicBookingsTrackRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -113,8 +127,10 @@ export interface FileRoutesByTo {
   '/concept/kinetic': typeof ConceptKineticRoute
   '/concept/noir': typeof ConceptNoirRoute
   '/concept/noir-book': typeof ConceptNoirBookRoute
+  '/concept/noir-track': typeof ConceptNoirTrackRoute
   '/concept/serif': typeof ConceptSerifRoute
-  '/api/public/bookings': typeof ApiPublicBookingsRoute
+  '/api/public/bookings': typeof ApiPublicBookingsRouteWithChildren
+  '/api/public/bookings/track': typeof ApiPublicBookingsTrackRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -129,8 +145,10 @@ export interface FileRoutesById {
   '/concept/kinetic': typeof ConceptKineticRoute
   '/concept/noir': typeof ConceptNoirRoute
   '/concept/noir-book': typeof ConceptNoirBookRoute
+  '/concept/noir-track': typeof ConceptNoirTrackRoute
   '/concept/serif': typeof ConceptSerifRoute
-  '/api/public/bookings': typeof ApiPublicBookingsRoute
+  '/api/public/bookings': typeof ApiPublicBookingsRouteWithChildren
+  '/api/public/bookings/track': typeof ApiPublicBookingsTrackRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -145,8 +163,10 @@ export interface FileRouteTypes {
     | '/concept/kinetic'
     | '/concept/noir'
     | '/concept/noir-book'
+    | '/concept/noir-track'
     | '/concept/serif'
     | '/api/public/bookings'
+    | '/api/public/bookings/track'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -159,8 +179,10 @@ export interface FileRouteTypes {
     | '/concept/kinetic'
     | '/concept/noir'
     | '/concept/noir-book'
+    | '/concept/noir-track'
     | '/concept/serif'
     | '/api/public/bookings'
+    | '/api/public/bookings/track'
   id:
     | '__root__'
     | '/'
@@ -174,8 +196,10 @@ export interface FileRouteTypes {
     | '/concept/kinetic'
     | '/concept/noir'
     | '/concept/noir-book'
+    | '/concept/noir-track'
     | '/concept/serif'
     | '/api/public/bookings'
+    | '/api/public/bookings/track'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -189,8 +213,9 @@ export interface RootRouteChildren {
   ConceptKineticRoute: typeof ConceptKineticRoute
   ConceptNoirRoute: typeof ConceptNoirRoute
   ConceptNoirBookRoute: typeof ConceptNoirBookRoute
+  ConceptNoirTrackRoute: typeof ConceptNoirTrackRoute
   ConceptSerifRoute: typeof ConceptSerifRoute
-  ApiPublicBookingsRoute: typeof ApiPublicBookingsRoute
+  ApiPublicBookingsRoute: typeof ApiPublicBookingsRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -272,6 +297,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConceptNoirBookRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/concept/noir-track': {
+      id: '/concept/noir-track'
+      path: '/concept/noir-track'
+      fullPath: '/concept/noir-track'
+      preLoaderRoute: typeof ConceptNoirTrackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/concept/serif': {
       id: '/concept/serif'
       path: '/concept/serif'
@@ -285,6 +317,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/api/public/bookings'
       preLoaderRoute: typeof ApiPublicBookingsRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/api/public/bookings/track': {
+      id: '/api/public/bookings/track'
+      path: '/track'
+      fullPath: '/api/public/bookings/track'
+      preLoaderRoute: typeof ApiPublicBookingsTrackRouteImport
+      parentRoute: typeof ApiPublicBookingsRoute
     }
   }
 }
@@ -300,6 +339,17 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
+interface ApiPublicBookingsRouteChildren {
+  ApiPublicBookingsTrackRoute: typeof ApiPublicBookingsTrackRoute
+}
+
+const ApiPublicBookingsRouteChildren: ApiPublicBookingsRouteChildren = {
+  ApiPublicBookingsTrackRoute: ApiPublicBookingsTrackRoute,
+}
+
+const ApiPublicBookingsRouteWithChildren =
+  ApiPublicBookingsRoute._addFileChildren(ApiPublicBookingsRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
@@ -311,8 +361,9 @@ const rootRouteChildren: RootRouteChildren = {
   ConceptKineticRoute: ConceptKineticRoute,
   ConceptNoirRoute: ConceptNoirRoute,
   ConceptNoirBookRoute: ConceptNoirBookRoute,
+  ConceptNoirTrackRoute: ConceptNoirTrackRoute,
   ConceptSerifRoute: ConceptSerifRoute,
-  ApiPublicBookingsRoute: ApiPublicBookingsRoute,
+  ApiPublicBookingsRoute: ApiPublicBookingsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
