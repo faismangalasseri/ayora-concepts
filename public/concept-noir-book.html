@@ -21,6 +21,7 @@
   html { color-scheme: dark; }
   .field:focus { border-color: rgba(214,176,100,.7); outline: none; box-shadow: 0 0 0 3px rgba(214,176,100,.08); }
   @media (prefers-reduced-motion: no-preference) { .enter { animation: enter .8s cubic-bezier(.16,1,.3,1) both; } @keyframes enter { from { opacity:0; transform:translateY(20px) } } }
+  .slot input:disabled + span { opacity: .35; text-decoration: line-through; }
 </style>
 </head>
 <body class="min-h-screen bg-noir text-mist font-sans antialiased">
@@ -40,20 +41,28 @@
     <div class="mb-12 max-w-2xl">
       <p class="text-[10px] uppercase tracking-[0.35em] text-gold/80">Book at-home wellness</p>
       <h1 class="mt-5 font-display text-5xl font-light leading-tight md:text-7xl">Your session,<br><span class="italic text-gold">simply arranged.</span></h1>
-      <p class="mt-6 max-w-xl text-sm leading-relaxed text-mist/55">Choose your preferences below. We’ll open WhatsApp with your details ready to send, and AYORA will confirm availability with you.</p>
+      <p class="mt-6 max-w-xl text-sm leading-relaxed text-mist/55">Every session is 60 minutes. Choose your preferences below and send your request — AYORA will confirm your appointment on WhatsApp.</p>
     </div>
 
     <form id="booking-form" class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_340px]" novalidate>
       <section class="border border-white/10 bg-noir-soft/60 p-6 md:p-9" aria-labelledby="details-title">
         <h2 id="details-title" class="font-display text-2xl">Session details</h2>
         <div class="mt-8 grid gap-6 sm:grid-cols-2">
-          <label class="sm:col-span-2"><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Service</span><select id="service" required class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist"><option value="">Choose a service</option><option>Ayurvedic Relaxation Massage</option><option>Abhyanga-Inspired Massage</option><option>Head & Shoulder Wellness Massage</option><option>Back & Body Relaxation</option><option>Foot Wellness Massage</option><option>Stress & Relaxation Massage</option><option>Kalari Marma Thirummal</option><option>Sports Injury Massage</option></select><span class="error mt-2 hidden text-xs text-gold" data-error="service">Please choose a service.</span></label>
-          <fieldset class="sm:col-span-2"><legend class="mb-3 text-[10px] uppercase tracking-[0.2em] text-mist/55">Preferred wellness professional</legend><div class="grid grid-cols-2 gap-3"><label class="cursor-pointer border border-white/10 p-4 text-sm has-[:checked]:border-gold/70 has-[:checked]:text-gold"><input class="mr-2 accent-gold" type="radio" name="professional" value="Female" required>Female</label><label class="cursor-pointer border border-white/10 p-4 text-sm has-[:checked]:border-gold/70 has-[:checked]:text-gold"><input class="mr-2 accent-gold" type="radio" name="professional" value="Male" required>Male</label></div><p class="mt-3 text-xs leading-relaxed text-mist/40">Male and female professionals are scheduled separately, subject to availability and AYORA service policy.</p><span class="error mt-2 hidden text-xs text-gold" data-error="professional">Please select your preference.</span></fieldset>
-          <label><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Preferred date</span><input id="date" type="date" required class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist"><span class="error mt-2 hidden text-xs text-gold" data-error="date">Please choose a date.</span></label>
-          <label><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Preferred time</span><select id="time" required class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist"><option value="">Choose a time slot</option><option value="9:00 AM – 10:00 AM">9:00 – 10:00 AM</option><option value="12:00 PM – 1:00 PM">12:00 – 1:00 PM</option><option value="3:00 PM – 4:00 PM">3:00 – 4:00 PM</option><option value="6:00 PM – 7:00 PM">6:00 – 7:00 PM</option></select><span class="mt-2 block text-xs leading-relaxed text-mist/40">Daily session slots: 9–10 AM · 12–1 PM · 3–4 PM · 6–7 PM.</span><span class="error mt-2 hidden text-xs text-gold" data-error="time">Please choose a time slot.</span></label>
+          <label class="sm:col-span-2"><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Service · 60 minutes</span><select id="service" required class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist"><option value="">Choose a service</option><option>Ayurvedic Relaxation Massage</option><option>Abhyanga-Inspired Massage</option><option>Head &amp; Shoulder Wellness Massage</option><option>Back &amp; Body Relaxation</option><option>Foot Wellness Massage</option><option>Stress &amp; Relaxation Massage</option><option>Kalari Marma Thirummal</option><option>Sports Injury Massage</option></select><span class="error mt-2 hidden text-xs text-gold" data-error="service">Please choose a service.</span></label>
+          <fieldset class="sm:col-span-2"><legend class="mb-3 text-[10px] uppercase tracking-[0.2em] text-mist/55">Preferred wellness professional</legend><div class="grid gap-3 sm:grid-cols-3"><label class="cursor-pointer border border-white/10 p-4 text-sm has-[:checked]:border-gold/70 has-[:checked]:text-gold"><input class="mr-2 accent-gold" type="radio" name="professional" value="Female" required>Female</label><label class="cursor-pointer border border-white/10 p-4 text-sm has-[:checked]:border-gold/70 has-[:checked]:text-gold"><input class="mr-2 accent-gold" type="radio" name="professional" value="Male" required>Male</label><label class="cursor-pointer border border-white/10 p-4 text-sm has-[:checked]:border-gold/70 has-[:checked]:text-gold"><input class="mr-2 accent-gold" type="radio" name="professional" value="No Preference" required>No preference</label></div><p class="mt-3 text-xs leading-relaxed text-mist/40">Male and female professionals are scheduled separately, subject to availability and AYORA service policy.</p><span class="error mt-2 hidden text-xs text-gold" data-error="professional">Please select your preference.</span></fieldset>
+          <label><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Preferred date</span><input id="date" type="date" required class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist"><span class="mt-2 block text-xs leading-relaxed text-mist/40">Today or later.</span><span class="error mt-2 hidden text-xs text-gold" data-error="date">Please choose today or a later date.</span></label>
+          <fieldset><legend class="mb-3 text-[10px] uppercase tracking-[0.2em] text-mist/55">Preferred time · 60 min</legend><div id="slots" class="grid grid-cols-2 gap-3">
+            <label class="slot cursor-pointer border border-white/10 p-3 text-sm has-[:checked]:border-gold/70 has-[:checked]:text-gold"><input class="mr-2 accent-gold" type="radio" name="time" value="9:00 AM – 10:00 AM" required><span>9 – 10 AM</span></label>
+            <label class="slot cursor-pointer border border-white/10 p-3 text-sm has-[:checked]:border-gold/70 has-[:checked]:text-gold"><input class="mr-2 accent-gold" type="radio" name="time" value="12:00 PM – 1:00 PM" required><span>12 – 1 PM</span></label>
+            <label class="slot cursor-pointer border border-white/10 p-3 text-sm has-[:checked]:border-gold/70 has-[:checked]:text-gold"><input class="mr-2 accent-gold" type="radio" name="time" value="3:00 PM – 4:00 PM" required><span>3 – 4 PM</span></label>
+            <label class="slot cursor-pointer border border-white/10 p-3 text-sm has-[:checked]:border-gold/70 has-[:checked]:text-gold"><input class="mr-2 accent-gold" type="radio" name="time" value="6:00 PM – 7:00 PM" required><span>6 – 7 PM</span></label>
+          </div><p id="slot-note" class="mt-3 text-xs leading-relaxed text-mist/40">Choose a date to see which slots are open. Booked slots are shown crossed out.</p><span class="error mt-2 hidden text-xs text-gold" data-error="time">Please choose an open time slot.</span></fieldset>
           <label class="sm:col-span-2"><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Emirate and area</span><input id="location" type="text" required maxlength="120" autocomplete="street-address" placeholder="e.g. Dubai Marina, Dubai" class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist placeholder:text-mist/25"><span class="error mt-2 hidden text-xs text-gold" data-error="location">Please enter your area and emirate.</span></label>
+          <label class="sm:col-span-2"><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Full address · building or villa</span><input id="address" type="text" maxlength="160" autocomplete="address-line1" placeholder="Building / villa, street, landmark" class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist placeholder:text-mist/25"></label>
           <label><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Your name</span><input id="name" type="text" required minlength="2" maxlength="80" autocomplete="name" class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist"><span class="error mt-2 hidden text-xs text-gold" data-error="name">Please enter your name.</span></label>
           <label><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Phone number</span><input id="phone" type="tel" required maxlength="20" pattern="[+0-9 ()-]{7,20}" autocomplete="tel" placeholder="+971" class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist placeholder:text-mist/25"><span class="error mt-2 hidden text-xs text-gold" data-error="phone">Enter a valid phone number.</span></label>
+          <label><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Email <span class="text-mist/30">(optional)</span></span><input id="email" type="email" maxlength="160" autocomplete="email" class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist"></label>
+          <label><span class="mb-2 block text-[10px] uppercase tracking-[0.2em] text-mist/55">Special request <span class="text-mist/30">(optional)</span></span><input id="message" type="text" maxlength="300" placeholder="Anything we should know" class="field w-full border border-white/10 bg-noir px-4 py-3.5 text-sm text-mist placeholder:text-mist/25"></label>
         </div>
       </section>
 
@@ -62,55 +71,179 @@
         <h2 id="summary-title" class="mt-3 font-display text-2xl">Booking summary</h2>
         <dl class="mt-7 space-y-4 border-y border-white/10 py-6 text-sm">
           <div><dt class="text-[9px] uppercase tracking-[0.18em] text-mist/35">Service</dt><dd id="summary-service" class="mt-1 text-mist/80">Not selected</dd></div>
+          <div><dt class="text-[9px] uppercase tracking-[0.18em] text-mist/35">Duration</dt><dd class="mt-1 text-mist/80">60 minutes</dd></div>
           <div><dt class="text-[9px] uppercase tracking-[0.18em] text-mist/35">Professional</dt><dd id="summary-professional" class="mt-1 text-mist/80">Not selected</dd></div>
           <div><dt class="text-[9px] uppercase tracking-[0.18em] text-mist/35">When</dt><dd id="summary-when" class="mt-1 text-mist/80">Not selected</dd></div>
           <div><dt class="text-[9px] uppercase tracking-[0.18em] text-mist/35">Location</dt><dd id="summary-location" class="mt-1 text-mist/80">Not entered</dd></div>
         </dl>
-        <button type="submit" class="mt-6 w-full rounded-full bg-gold px-6 py-4 text-sm font-semibold text-noir transition-transform hover:scale-[1.02]">Continue on WhatsApp</button>
-        <p class="mt-4 text-center text-[10px] leading-relaxed text-mist/35">No payment is taken now. Your appointment is confirmed only after AYORA replies.</p>
+        <button id="submit-btn" type="submit" class="mt-6 w-full rounded-full bg-gold px-6 py-4 text-sm font-semibold text-noir transition-transform hover:scale-[1.02] disabled:opacity-60">Request booking</button>
+        <p id="form-error" class="mt-4 hidden text-center text-xs leading-relaxed text-gold"></p>
+        <p class="mt-4 text-center text-[10px] leading-relaxed text-mist/35">Your selected time is a preferred appointment time. No payment is taken now — AYORA confirms availability on WhatsApp.</p>
       </aside>
     </form>
+
+    <section id="confirmation" class="hidden border border-gold/40 bg-noir-soft/80 p-8 md:p-12" aria-live="polite">
+      <p class="text-[10px] uppercase tracking-[0.3em] text-gold">Booking request received</p>
+      <h2 class="mt-5 font-display text-4xl font-light md:text-5xl">Thank you, <span id="confirm-name" class="italic text-gold">friend</span>.</h2>
+      <p class="mt-5 max-w-lg text-sm leading-relaxed text-mist/55">Your request has been received. AYORA will contact you on WhatsApp to confirm your appointment.</p>
+      <dl class="mt-8 grid max-w-2xl gap-5 border-y border-white/10 py-6 text-sm sm:grid-cols-2">
+        <div><dt class="text-[9px] uppercase tracking-[0.18em] text-mist/35">Booking reference</dt><dd id="confirm-ref" class="mt-1 text-gold">—</dd></div>
+        <div><dt class="text-[9px] uppercase tracking-[0.18em] text-mist/35">Service · 60 min</dt><dd id="confirm-service" class="mt-1 text-mist/80">—</dd></div>
+        <div><dt class="text-[9px] uppercase tracking-[0.18em] text-mist/35">When</dt><dd id="confirm-when" class="mt-1 text-mist/80">—</dd></div>
+        <div><dt class="text-[9px] uppercase tracking-[0.18em] text-mist/35">Location</dt><dd id="confirm-location" class="mt-1 text-mist/80">—</dd></div>
+      </dl>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a id="confirm-whatsapp" href="#" target="_blank" rel="noopener noreferrer" class="rounded-full bg-gold px-7 py-4 text-sm font-semibold text-noir transition-transform hover:scale-[1.02]">Continue on WhatsApp</a>
+        <a href="/concept/noir" target="_top" class="rounded-full border border-white/15 px-7 py-4 text-sm text-mist/75 transition-colors hover:border-gold/60 hover:text-gold">Back to website</a>
+      </div>
+    </section>
   </div>
 </main>
 <footer class="border-t border-white/5 px-6 py-8 text-center text-[10px] uppercase tracking-[0.25em] text-mist/35">AYORA — Wellness at your doorstep.</footer>
 <script>
+  const WHATSAPP = '971501234567';
   const form = document.getElementById('booking-form');
-  const fields = { service: document.getElementById('service'), date: document.getElementById('date'), time: document.getElementById('time'), location: document.getElementById('location'), name: document.getElementById('name'), phone: document.getElementById('phone') };
-  const today = new Date(); today.setMinutes(today.getMinutes() - today.getTimezoneOffset()); fields.date.min = today.toISOString().split('T')[0];
-  const clean = (value, max) => value.trim().replace(/[<>]/g, '').slice(0, max);
-  function professional() { const selected = form.querySelector('input[name="professional"]:checked'); return selected ? selected.value : ''; }
+  const submitBtn = document.getElementById('submit-btn');
+  const formError = document.getElementById('form-error');
+  const fields = {
+    service: document.getElementById('service'),
+    date: document.getElementById('date'),
+    location: document.getElementById('location'),
+    address: document.getElementById('address'),
+    name: document.getElementById('name'),
+    phone: document.getElementById('phone'),
+    email: document.getElementById('email'),
+    message: document.getElementById('message'),
+  };
+
+  const localToday = () => { const d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().split('T')[0]; };
+  fields.date.min = localToday();
+
+  const clean = (value, max) => (value || '').trim().replace(/[<>]/g, '').slice(0, max);
+  const radio = (name) => { const el = form.querySelector('input[name="' + name + '"]:checked'); return el ? el.value : ''; };
+  const slotInputs = () => Array.from(document.querySelectorAll('#slots input[type="radio"]'));
+
+  // Pre-select a service when arriving from a service card
+  const requested = new URLSearchParams(window.location.search).get('service');
+  if (requested) {
+    const match = Array.from(fields.service.options).find((o) => o.value && o.value.toLowerCase() === requested.toLowerCase());
+    if (match) fields.service.value = match.value;
+  }
+
+  function showError(text) { formError.textContent = text; formError.classList.remove('hidden'); }
+  function hideError() { formError.classList.add('hidden'); }
+
+  async function refreshSlots() {
+    const date = fields.date.value;
+    const note = document.getElementById('slot-note');
+    slotInputs().forEach((input) => { input.disabled = false; });
+    if (!date) { note.textContent = 'Choose a date to see which slots are open. Booked slots are shown crossed out.'; return; }
+    note.textContent = 'Checking availability…';
+    try {
+      const res = await fetch('/api/public/bookings?date=' + encodeURIComponent(date));
+      const data = await res.json();
+      const taken = Array.isArray(data.taken) ? data.taken : [];
+      slotInputs().forEach((input) => {
+        const isTaken = taken.includes(input.value);
+        input.disabled = isTaken;
+        if (isTaken && input.checked) input.checked = false;
+      });
+      const open = slotInputs().filter((i) => !i.disabled).length;
+      note.textContent = open ? open + ' of 4 slots open on this date. Booked slots are crossed out.' : 'All slots are booked on this date. Please choose another date.';
+    } catch {
+      note.textContent = 'Slots: 9–10 AM · 12–1 PM · 3–4 PM · 6–7 PM.';
+    }
+    updateSummary();
+  }
+
   function updateSummary() {
     document.getElementById('summary-service').textContent = fields.service.value || 'Not selected';
-    document.getElementById('summary-professional').textContent = professional() ? professional() + ' professional' : 'Not selected';
-    document.getElementById('summary-when').textContent = fields.date.value && fields.time.value ? fields.date.value + ' at ' + fields.time.value : fields.date.value || fields.time.value || 'Not selected';
-    document.getElementById('summary-location').textContent = clean(fields.location.value, 120) || 'Not entered';
+    document.getElementById('summary-professional').textContent = radio('professional') || 'Not selected';
+    const when = fields.date.value && radio('time') ? fields.date.value + ' at ' + radio('time') : fields.date.value || radio('time') || 'Not selected';
+    document.getElementById('summary-when').textContent = when;
+    const place = [clean(fields.location.value, 120), clean(fields.address.value, 160)].filter(Boolean).join(' · ');
+    document.getElementById('summary-location').textContent = place || 'Not entered';
   }
-  form.addEventListener('input', updateSummary);
-  form.addEventListener('change', updateSummary);
-  form.addEventListener('submit', (event) => {
+
+  form.addEventListener('input', () => { hideError(); updateSummary(); });
+  form.addEventListener('change', (event) => { hideError(); if (event.target === fields.date) refreshSlots(); updateSummary(); });
+
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
     document.querySelectorAll('.error').forEach((el) => el.classList.add('hidden'));
-    let valid = form.checkValidity();
-    Object.entries(fields).forEach(([key, field]) => { if (!field.checkValidity()) document.querySelector('[data-error="' + key + '"]').classList.remove('hidden'); });
-    if (!professional()) { document.querySelector('[data-error="professional"]').classList.remove('hidden'); valid = false; }
+    hideError();
+
+    let valid = true;
+    ['service', 'date', 'location', 'name', 'phone'].forEach((key) => {
+      if (!fields[key].checkValidity()) { document.querySelector('[data-error="' + key + '"]').classList.remove('hidden'); valid = false; }
+    });
+    if (fields.date.value && fields.date.value < localToday()) { document.querySelector('[data-error="date"]').classList.remove('hidden'); valid = false; }
+    if (!radio('professional')) { document.querySelector('[data-error="professional"]').classList.remove('hidden'); valid = false; }
+    if (!radio('time')) { document.querySelector('[data-error="time"]').classList.remove('hidden'); valid = false; }
     if (!valid) { const invalid = form.querySelector(':invalid'); if (invalid) invalid.focus(); return; }
-    const message = ['Hello AYORA, I would like to request a home wellness session.', '', 'Service: ' + clean(fields.service.value, 80), 'Preferred professional: ' + professional(), 'Preferred date: ' + fields.date.value, 'Preferred time: ' + fields.time.value, 'Location: ' + clean(fields.location.value, 120), 'Name: ' + clean(fields.name.value, 80), 'Phone: ' + clean(fields.phone.value, 20), '', 'Please confirm availability.'].join('\n');
-    const whatsappWindow = window.open('https://wa.me/971501234567?text=' + encodeURIComponent(message), '_blank', 'noopener,noreferrer');
-    if (!whatsappWindow) window.location.href = 'https://wa.me/971501234567?text=' + encodeURIComponent(message);
-    fetch('/api/public/bookings', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        service: clean(fields.service.value, 120),
-        professional_preference: professional(),
-        booking_date: fields.date.value,
-        time_slot: fields.time.value,
-        location: clean(fields.location.value, 160),
-        customer_name: clean(fields.name.value, 80),
-        phone: clean(fields.phone.value, 25)
-      })
-    }).catch(() => {});
+
+    const payload = {
+      service: clean(fields.service.value, 120),
+      professional_preference: radio('professional'),
+      booking_date: fields.date.value,
+      time_slot: radio('time'),
+      location: [clean(fields.location.value, 120), clean(fields.address.value, 160)].filter(Boolean).join(' · '),
+      customer_name: clean(fields.name.value, 80),
+      phone: clean(fields.phone.value, 25),
+      email: clean(fields.email.value, 160),
+      customer_message: clean(fields.message.value, 300),
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending request…';
+    let result;
+    try {
+      const res = await fetch('/api/public/bookings', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      result = await res.json();
+      if (!res.ok) {
+        showError(result.error || 'Could not send your request. Please try again.');
+        if (result.code === 'slot_taken') await refreshSlots();
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Request booking';
+        return;
+      }
+    } catch {
+      showError('Could not reach AYORA right now. Please try again or message us on WhatsApp.');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Request booking';
+      return;
+    }
+
+    const reference = result.reference || '';
+    const message = [
+      'Hello AYORA, I would like to book a wellness session.',
+      '',
+      'Service: ' + payload.service + ' (60 min)',
+      'Preferred professional: ' + payload.professional_preference,
+      'Date: ' + payload.booking_date,
+      'Time: ' + payload.time_slot,
+      'Location: ' + payload.location,
+      'Name: ' + payload.customer_name,
+      'Phone: ' + payload.phone,
+      payload.email ? 'Email: ' + payload.email : '',
+      payload.customer_message ? 'Note: ' + payload.customer_message : '',
+      '',
+      'Booking reference: ' + reference,
+      'Please confirm availability.',
+    ].filter((line) => line !== '').join('\n');
+
+    document.getElementById('confirm-name').textContent = payload.customer_name;
+    document.getElementById('confirm-ref').textContent = reference;
+    document.getElementById('confirm-service').textContent = payload.service;
+    document.getElementById('confirm-when').textContent = payload.booking_date + ' at ' + payload.time_slot;
+    document.getElementById('confirm-location').textContent = payload.location;
+    document.getElementById('confirm-whatsapp').href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(message);
+
+    form.classList.add('hidden');
+    document.getElementById('confirmation').classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
+
   updateSummary();
 </script>
 </body>
