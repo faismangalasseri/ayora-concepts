@@ -67,6 +67,20 @@ function AdminBookings() {
     }
   }
 
+  function confirmMessageUrl(b: Booking) {
+    const firstName = b.customer_name.split(" ")[0] ?? b.customer_name;
+    const message =
+      `Hello ${firstName}, your AYORA wellness session on ${b.booking_date} at ${b.time_slot} is confirmed. ` +
+      `Service: ${b.service} (60 min). Location: ${b.location}. ` +
+      `Booking reference: ${b.booking_reference ?? ""}. Our professional will arrive at your location. — AYORA`;
+    return `https://wa.me/${b.phone.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(message)}`;
+  }
+
+  async function confirmAndMessage(b: Booking) {
+    await patch(b.id, { status: "confirmed" });
+    window.open(confirmMessageUrl(b), "_blank", "noopener,noreferrer");
+  }
+
   async function signOut() {
     await queryClient.cancelQueries();
     queryClient.clear();
@@ -208,6 +222,25 @@ function AdminBookings() {
               </div>
 
               <div className="mt-4 flex flex-wrap gap-2 border-t border-slate-100 pt-4">
+                {b.status === "pending" && (
+                  <button
+                    disabled={savingId === b.id}
+                    onClick={() => confirmAndMessage(b)}
+                    className="rounded-lg border border-emerald-600 bg-emerald-600 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-emerald-700 disabled:opacity-40"
+                  >
+                    Confirm &amp; message on WhatsApp
+                  </button>
+                )}
+                {b.status === "confirmed" && (
+                  <a
+                    href={confirmMessageUrl(b)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-sm font-medium text-emerald-700 transition hover:bg-emerald-100"
+                  >
+                    Resend confirmation on WhatsApp
+                  </a>
+                )}
                 {STATUSES.map((s) => (
                   <button
                     key={s}
