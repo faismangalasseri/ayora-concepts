@@ -67,6 +67,20 @@ function AdminBookings() {
     }
   }
 
+  function confirmMessageUrl(b: Booking) {
+    const firstName = b.customer_name.split(" ")[0] ?? b.customer_name;
+    const message =
+      `Hello ${firstName}, your AYORA wellness session on ${b.booking_date} at ${b.time_slot} is confirmed. ` +
+      `Service: ${b.service} (60 min). Location: ${b.location}. ` +
+      `Booking reference: ${b.booking_reference ?? ""}. Our professional will arrive at your location. — AYORA`;
+    return `https://wa.me/${b.phone.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(message)}`;
+  }
+
+  async function confirmAndMessage(b: Booking) {
+    await patch(b.id, { status: "confirmed" });
+    window.open(confirmMessageUrl(b), "_blank", "noopener,noreferrer");
+  }
+
   async function signOut() {
     await queryClient.cancelQueries();
     queryClient.clear();
