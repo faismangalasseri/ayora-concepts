@@ -222,6 +222,25 @@ function AdminBookings() {
               </div>
 
               <div className="mt-4 flex flex-wrap gap-2 border-t border-slate-100 pt-4">
+                {b.status === "pending" && (
+                  <button
+                    disabled={savingId === b.id}
+                    onClick={() => confirmAndMessage(b)}
+                    className="rounded-lg border border-emerald-600 bg-emerald-600 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-emerald-700 disabled:opacity-40"
+                  >
+                    Confirm &amp; message on WhatsApp
+                  </button>
+                )}
+                {b.status === "confirmed" && (
+                  <a
+                    href={confirmMessageUrl(b)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-sm font-medium text-emerald-700 transition hover:bg-emerald-100"
+                  >
+                    Resend confirmation on WhatsApp
+                  </a>
+                )}
                 {STATUSES.map((s) => (
                   <button
                     key={s}
