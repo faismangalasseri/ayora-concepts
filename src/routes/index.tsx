@@ -327,7 +327,7 @@ function Index() {
       >
         <div className="flex overflow-hidden rounded-sm border border-ink/10 bg-ivory/95 shadow-xl shadow-ink/10 backdrop-blur-md">
           <a
-            href="https://wa.me/971501234567?text=Hello%20AYORA!%20I%27d%20like%20to%20book%20a%20home%20massage%20session."
+            href="https://wa.me/971557204110?text=Hello%20AYORA!%20I%27d%20like%20to%20book%20a%20home%20massage%20session."
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Chat with AYORA on WhatsApp"
@@ -338,7 +338,7 @@ function Index() {
             <span className="hidden text-xs uppercase tracking-wide sm:inline">WhatsApp</span>
           </a>
           <a
-            href="tel:+971501234567"
+            href="tel:+971557204110"
             aria-label="Call AYORA"
             title="Call AYORA"
             className="flex h-12 items-center gap-2 rounded-none px-4 text-ink transition-colors hover:bg-linen hover:text-gold"
