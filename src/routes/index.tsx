@@ -8,7 +8,7 @@ import relaxImg from "@/assets/service-relax.jpg";
 import { Button } from "@/components/ui/button";
 
 const WHATSAPP_URL =
-  "https://wa.me/971500000000?text=" +
+  "https://wa.me/971557204110?text=" +
   encodeURIComponent("Hello AYORA, I'd like to book a home wellness session.");
 
 export const Route = createFileRoute("/")({
@@ -299,10 +299,10 @@ function Index() {
             </a>
             <span className="px-4 text-xs uppercase tracking-widest text-ink/40">or</span>
             <a
-              href="mailto:hello@ayora.ae"
+              href="mailto:info@ayora.ae"
               className="border-b border-ink/10 pb-1 text-sm font-medium transition-colors hover:border-gold"
             >
-              hello@ayora.ae
+              info@ayora.ae
             </a>
           </div>
         </div>
